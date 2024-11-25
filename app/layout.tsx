@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import "./globals.css";
-import { Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
+import { Toaster } from "sonner";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -13,7 +14,7 @@ import { Poppins } from "next/font/google";
 //   variable: "--font-geist-mono",
 //   weight: "500",
 // });
-const poppins = Poppins({ subsets: ["latin"], weight: "500" });
+const poppins = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,7 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className}   antialiased scroll-smooth`}>
+      <body
+        className={`${poppins.className}   antialiased scroll-smooth bg-[#0f172a]`}
+      >
+        <Toaster richColors closeButton />
         {children}
       </body>
     </html>

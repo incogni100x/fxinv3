@@ -5,6 +5,7 @@ import { TextGenerateEffect } from "./ui/text-generate";
 
 import Image from "next/image";
 import { TickerTape } from "react-ts-tradingview-widgets";
+import Link from "next/link";
 
 export default function HeroSection() {
   const words = "Empower Your Future with Smarter Investments";
@@ -16,9 +17,13 @@ export default function HeroSection() {
           Our platform delivers unmatched security, expert support, and a
           seamless trading experience tailored for your success.
         </p>
-        <div className="mt-10 flex justify-center gap-x-6 hero_buttons">
-          <Button>Get started today</Button>
-          <Button variant={"outline"}>Log in</Button>
+        <div className="my-10 flex justify-center gap-x-6 hero_buttons">
+          <Button asChild>
+            <Link href={"/register"}>Get started today</Link>
+          </Button>
+          <Button variant={"outline"} asChild>
+            <Link href={"/login"}>Log in</Link>
+          </Button>
         </div>
         <Image
           src={"/images/dashboard.png"}
