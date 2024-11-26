@@ -11,15 +11,12 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useRouter } from "next/navigation";
+
 import { NewPasswordSchema } from "@/schemas/auth";
 import { FormError } from "@/components/ui/form-error";
 import { Input } from "@/components/ui/input";
 
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import Link from "next/link";
-
-import { toast } from "sonner";
 
 import FormButton from "@/components/ui/form-button";
 import { FormWrapper } from "./form-wrapper";
@@ -29,7 +26,6 @@ export default function NewPasswordForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof NewPasswordSchema>>({
     resolver: zodResolver(NewPasswordSchema),

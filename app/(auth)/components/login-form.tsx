@@ -11,15 +11,13 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { LoginSchema } from "@/schemas/auth";
 import { FormError } from "@/components/ui/form-error";
 import { Input } from "@/components/ui/input";
 
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
-
-import { toast } from "sonner";
 
 import FormButton from "@/components/ui/form-button";
 import { FormWrapper } from "./form-wrapper";

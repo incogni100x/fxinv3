@@ -14,11 +14,10 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { OtpSchema } from "@/schemas/auth";
-import { FormWrapper } from "./form-wrapper";
+
 import Spinner from "@/components/ui/loader";
 import { useEffect, useRef, useState } from "react";
 import { FormError } from "@/components/ui/form-error";
@@ -136,7 +135,7 @@ export default function VerifyOtpForm({
       } else {
         setError(undefined);
         toast.success(res.success);
-        router.push("/");
+        router.push("/investments");
       }
     } catch (err: unknown) {
       //@ts-expect-error - The error object is of type unknown
@@ -163,7 +162,12 @@ export default function VerifyOtpForm({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <InputOTP pattern={REGEXP_ONLY_DIGITS} maxLength={6} {...field}>
+                <InputOTP
+                  disabled={isPending}
+                  pattern={REGEXP_ONLY_DIGITS}
+                  maxLength={6}
+                  {...field}
+                >
                   <InputOTPGroup className="gap-2">
                     <InputOTPSlot index={0} />
                     <InputOTPSlot index={1} />
@@ -207,7 +211,7 @@ export default function VerifyOtpForm({
             variant="link"
             className="text-base px-1 py-0"
             onClick={onResend}
-            disabled={countdownTime > 0 || isPending}
+            disabled={countdownTime > 0 || loading || isPending}
           >
             {countdownTime > 0 ? "" : "Resend code"}
           </Button>

@@ -24,59 +24,109 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { IdentificationSchema } from "@/schemas/onboarding";
+import { createSupabaseBrowser } from "@/lib/supabase/client";
+import { FormError } from "@/components/ui/form-error";
+import { updateDocumentIdentification } from "@/actions/on-boarding";
 
-const schema = z.object({
-  document_type: z.string().min(1, { message: "Document type is required" }),
-  images: z
-    .array(z.instanceof(File))
-    .min(2, { message: "Minimum of 2 images are required" })
-    .max(10, { message: "Maximum of 10 images are allowed" }),
-});
-
-type Schema = z.infer<typeof schema>;
+type Schema = z.infer<typeof IdentificationSchema>;
 
 export function IdentificationForm() {
   const [loading, setLoading] = React.useState(false);
-  //   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile(
-  //     "imageUploader",
-  //     { defaultUploadedFiles: [] }
-  //   )
+  const [error, setError] = React.useState<string | undefined>(undefined);
+
   const form = useForm<Schema>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(IdentificationSchema),
     defaultValues: {
       images: [],
+      document_type: "",
     },
   });
 
-  function onSubmit(values: Schema) {
-    console.log(values);
+  async function onSubmit(values: Schema) {
+    setLoading(true);
+    const supabase = createSupabaseBrowser();
+    try {
+      // Authenticate user
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) {
+        setError("Unauthorized");
+        return;
+      }
 
-    // setLoading(true)
+      const userId = data?.user?.id;
+      const uploadedImageUrls: string[] = [];
 
-    // toast.promise(onUpload(input.images), {
-    //   loading: "Uploading images...",
-    //   success: () => {
-    //     form.reset()
-    //     setLoading(false)
-    //     return "Images uploaded"
-    //   },
-    //   error: (err) => {
-    //     setLoading(false)
-    //     return getErrorMessage(err)
-    //   },
-    // })
+      // Check for selected images
+      if (!values.images || values.images.length === 0) {
+        toast.error("At least one image is required.");
+        return;
+      }
+
+      // Loop through the selected images and upload them
+      for (const file of values.images) {
+        const imageId = crypto.randomUUID();
+        const timestamp = Date.now(); // Current timestamp for additional folder
+        const uploadPath = `${userId}/${timestamp}-${imageId}/${file.name}`;
+        const { data: uploadedImage, error: uploadError } =
+          await supabase.storage
+            .from("Identifications")
+            .upload(uploadPath, file);
+
+        if (uploadError) {
+          toast.error(`Error uploading ${file.name}: ${uploadError.message}`);
+          return;
+        }
+
+        // Retrieve the public URL for the uploaded image
+        const { data: imageUrl } = supabase.storage
+          .from("Identifications")
+          .getPublicUrl(uploadedImage.path);
+
+        if (imageUrl?.publicUrl) {
+          uploadedImageUrls.push(imageUrl.publicUrl);
+        } else {
+          toast.error(`Failed to retrieve public URL for ${file.name}`);
+          return;
+        }
+      }
+
+      // Prepare payload
+      const idData = {
+        document_type: values.document_type,
+        images: uploadedImageUrls,
+      };
+
+      // Update document identification
+      const response = await updateDocumentIdentification(idData, 3);
+
+      // Handle response
+      if (response?.error) {
+        toast.error(response.error);
+      } else {
+        toast.success("Identification documents updated successfully.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Oops, something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <FormWrapper
       Label="Verify Your Identity"
       description="Submit clear images of your ID to confirm your identity. "
+      currentStep="3"
+      lastStep="4"
     >
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex w-full flex-col gap-6"
         >
+          <FormError message={error} />
           <FormField
             control={form.control}
             name="document_type"
@@ -86,7 +136,7 @@ export function IdentificationForm() {
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  //   disabled={isPending}
+                  disabled={loading}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -127,7 +177,7 @@ export function IdentificationForm() {
                       // progresses={progresses}
                       // pass the onUpload function here for direct upload
                       // onUpload={uploadFiles}
-                      // disabled={isUploading}
+                      disabled={loading}
                     />
                   </FormControl>
                   <FormMessage />

@@ -11,14 +11,12 @@ import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useRouter } from "next/navigation";
+
 import { ForgotPasswordSchema } from "@/schemas/auth";
 import { FormError } from "@/components/ui/form-error";
 import { Input } from "@/components/ui/input";
 
 import Link from "next/link";
-
-import { toast } from "sonner";
 
 import FormButton from "@/components/ui/form-button";
 import { FormWrapper } from "./form-wrapper";
@@ -30,8 +28,6 @@ export default function ForgotPasswordForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
-
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),

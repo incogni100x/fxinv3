@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-const plans = [
+export const plans = [
   {
-    name: "Bronze",
+    name: "bronze",
     description: "Best option for personal use & for your next project.",
     price: 1000,
     frequency: "month",
@@ -17,7 +17,7 @@ const plans = [
     roi: "1,750",
   },
   {
-    name: "Silver",
+    name: "silver",
     description: "Relevant for multiple users, extended & premium support.",
     price: 20000,
     frequency: "month",
@@ -30,7 +30,7 @@ const plans = [
     roi: "117,500",
   },
   {
-    name: "Gold",
+    name: "gold",
     description: "Relevant for multiple users, extended & premium support.",
     price: 50000,
     frequency: "month",
@@ -43,7 +43,7 @@ const plans = [
     roi: "350,000",
   },
   {
-    name: "Diamond",
+    name: "diamond",
     description: "Relevant for multiple users, extended & premium support.",
     price: 100000,
     frequency: "month",
@@ -71,7 +71,7 @@ export default function SubscriptionPlans() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className="flex flex-col p-6  text-center text-gray-900 bg-white rounded-lg border border-gray-200 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white"
+              className="flex flex-col p-6 capitalize text-center text-gray-900 bg-white rounded-lg border border-gray-200 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white"
             >
               <h3 className="mb-4 text-2xl font-semibold">{plan.name}</h3>
               <h3 className=" text-base text-muted-foreground">

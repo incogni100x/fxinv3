@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { usePathname, useRouter } from "next/navigation";
+
 import { SignUpSchema } from "@/schemas/auth";
 import { FormError } from "@/components/ui/form-error";
 import { Input } from "@/components/ui/input";
@@ -37,8 +37,7 @@ export default function RegisterForm() {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+
   const [isOtpDialogOpen, setOtpDialogOpen] = useState(false);
 
   const form = useForm<z.infer<typeof SignUpSchema>>({
@@ -257,7 +256,10 @@ export default function RegisterForm() {
       </FormWrapper>
 
       <Dialog open={isOtpDialogOpen} onOpenChange={setOtpDialogOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent
+          className="sm:max-w-[425px]"
+          onInteractOutside={(e) => e.preventDefault()}
+        >
           <DialogHeader>
             <DialogTitle>Email Verification</DialogTitle>
             <DialogDescription>

@@ -56,7 +56,7 @@ export default function Navbar({ user }: { user: User | null }) {
       <div className="flex gap-2 items-center">
         {user ? (
           <Button asChild>
-            <Link href={"/dashboard"}>Dashboard</Link>
+            <Link href={"/overview"}>Dashboard</Link>
           </Button>
         ) : (
           <>
@@ -108,7 +108,7 @@ export default function Navbar({ user }: { user: User | null }) {
                 {user ? (
                   <div className="flex justify-end">
                     <Button asChild>
-                      <Link href={"/dashboard"}>Dashboard</Link>
+                      <Link href={"/overview"}>Dashboard</Link>
                     </Button>
                   </div>
                 ) : (

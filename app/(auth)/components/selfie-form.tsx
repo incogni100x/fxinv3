@@ -13,9 +13,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { Camera, Upload, X } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { CameraDialog } from "./camera-dialog";
 import { FormWrapper } from "./form-wrapper";
+import { createSupabaseBrowser } from "@/lib/supabase/client";
+
+import { updateSelfieOnboarding } from "@/actions/on-boarding";
+import { toast } from "sonner";
+import Image from "next/image";
+import { FormError } from "@/components/ui/form-error";
 
 const formSchema = z.object({
   image: z.string().min(1, { message: "A verification photo is required" }),
@@ -23,6 +29,8 @@ const formSchema = z.object({
 
 export default function UserIdentityVerification() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,26 +39,26 @@ export default function UserIdentityVerification() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    // Here you would typically send the image to your server for verification
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) {
+      toast.error("Please select a valid image file.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      form.setValue("image", result, { shouldValidate: true });
+    };
+    reader.onerror = () => {
+      toast.error("Failed to read the file. Please try again.");
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleCapture = (imageDataUrl: string) => {
     form.setValue("image", imageDataUrl, { shouldValidate: true });
-  };
-  const image = form.watch("image");
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        form.setValue("image", result, { shouldValidate: true });
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   const handleRemove = () => {
@@ -60,13 +68,67 @@ export default function UserIdentityVerification() {
     }
   };
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true);
+    const supabase = createSupabaseBrowser();
+    try {
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) {
+        setError("Unauthorized");
+        toast.error("You must be logged in to verify your identity.");
+        return;
+      }
+
+      const userId = data.user.id;
+      const imageId = crypto.randomUUID();
+      const timestamp = Date.now(); // Current timestamp for additional folder
+      const uploadPath = `${userId}/${timestamp}-${imageId}.jpg`;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("Identifications")
+        .upload(uploadPath, new Blob([values.image], { type: "image/jpeg" }));
+
+      if (uploadError) {
+        toast.error(`Image upload failed: ${uploadError.message}`);
+        return;
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from("Identifications")
+        .getPublicUrl(uploadData.path);
+
+      if (!publicUrlData?.publicUrl) {
+        toast.error("Failed to retrieve the image URL.");
+        return;
+      }
+
+      // Assume updateDocumentIdentification is a provided API function
+      const response = await updateSelfieOnboarding(publicUrlData.publicUrl, 4);
+
+      if (response?.error) {
+        toast.error(response.error);
+      } else {
+        toast.success("Identity verified successfully.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const image = form.watch("image");
+
   return (
     <FormWrapper
       Label="Identity Verification"
       description="Please provide a clear photo of yourself for verification purposes."
+      currentStep="4"
+      lastStep="4"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormError message={error} />
           <FormField
             control={form.control}
             name="image"
@@ -76,7 +138,9 @@ export default function UserIdentityVerification() {
                   <div className="flex flex-col items-center space-y-4">
                     {field.value ? (
                       <div className="relative">
-                        <img
+                        <Image
+                          width={300}
+                          height={300}
                           src={field.value}
                           alt="User verification"
                           className="w-full max-w-xs max-h-64 object-cover rounded-lg"
@@ -85,6 +149,7 @@ export default function UserIdentityVerification() {
                           type="button"
                           variant="destructive"
                           size="icon"
+                          disabled={loading}
                           className="absolute top-2 right-2"
                           onClick={handleRemove}
                           aria-label="Remove image"
@@ -96,8 +161,7 @@ export default function UserIdentityVerification() {
                       <div className="space-y-2 w-full">
                         <CameraDialog
                           onImageCaptured={handleCapture}
-                          disabled={form.formState.isSubmitting}
-                          //   onClose={() => setShowCamera(false)}
+                          disabled={loading}
                         />
                         <div className="flex items-center">
                           <hr className="flex-grow border-t" />
@@ -130,8 +194,8 @@ export default function UserIdentityVerification() {
             )}
           />
           {image && (
-            <Button type="submit" className="w-full">
-              Verify Identity
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Verifying..." : "Verify Identity"}
             </Button>
           )}
         </form>

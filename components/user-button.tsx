@@ -1,5 +1,5 @@
 "use client";
-import { LogOut, Package2 } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -9,11 +9,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-import Link from "next/link";
 import { User } from "@supabase/supabase-js";
 // import {
 //   BookmarkIcon,
