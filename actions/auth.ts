@@ -59,7 +59,7 @@ export async function signIn(
   if (callbackUrl) {
     redirect(callbackUrl);
   }
-  redirect("/marketplace");
+  redirect("/overview");
 }
 
 export async function newPassword(values: z.infer<typeof NewPasswordSchema>) {

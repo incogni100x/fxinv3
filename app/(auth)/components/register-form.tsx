@@ -68,9 +68,9 @@ export default function RegisterForm() {
       } else {
         // Error from the API
         if (json.error.code) {
-          toast.error(json.error.code);
+          setError(json.error.code);
         } else if (json.error.message) {
-          toast.error(json.error.message);
+          setError(json.error.message);
         }
       }
     } catch (err: unknown) {
