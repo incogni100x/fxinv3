@@ -32,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${poppins.className}   antialiased scroll-smooth bg-[#0f172a]`}
       >
-        <Toaster richColors closeButton />
+        <Toaster richColors position="top-right" closeButton />
         {children}
       </body>
     </html>

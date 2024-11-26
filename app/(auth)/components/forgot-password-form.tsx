@@ -6,7 +6,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,10 +23,13 @@ import { toast } from "sonner";
 import FormButton from "@/components/ui/form-button";
 import { FormWrapper } from "./form-wrapper";
 import { Button } from "@/components/ui/button";
+import { reset } from "@/actions/auth";
+import { FormSuccess } from "@/components/ui/form-success";
 
 export default function ForgotPasswordForm() {
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
+  const [success, setSuccess] = useState<string | undefined>(undefined);
 
   const router = useRouter();
 
@@ -37,27 +40,23 @@ export default function ForgotPasswordForm() {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof ForgotPasswordSchema>) => {
-    try {
-      console.log(values);
-
-      //   setIsPending(true);
-      //   const response = await authAxios.post(`/register`, values);
-
-      //   if (response.status === 201) {
-      //     sessionStorage.setItem("email", values.business_email);
-      //     sessionStorage.setItem("authStep", "2");
-      //     toast.success(response.data.message);
-      //     router.refresh();
-      //     router.push("/verify-otp");
-      //   }
-    } catch (err: unknown) {
-      //@ts-expect-error - The error object is of type unknown
-      setError(err?.response?.data.message || "Oops,Something went wrong");
-      //@ts-expect-error - The error object is of type unknown
-      console.log(err.response);
-      setIsPending(false);
-    }
+  const onSubmit = (values: z.infer<typeof ForgotPasswordSchema>) => {
+    startTransition(() => {
+      reset(values)
+        .then((data) => {
+          if (data?.error) {
+            form.reset();
+            setSuccess("");
+            setError(data.error);
+          }
+          if (data?.success) {
+            form.reset();
+            setError("");
+            setSuccess(data.success);
+          }
+        })
+        .catch(() => setError("Oops! Something went wrong!"));
+    });
   };
 
   return (
@@ -68,7 +67,7 @@ export default function ForgotPasswordForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormError message={error} />
-
+          <FormSuccess message={success} />
           <FormField
             control={form.control}
             name="email"

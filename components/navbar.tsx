@@ -14,8 +14,9 @@ import {
 
 import { HambergerMenu } from "iconsax-react";
 import Logo from "./logo";
+import { User } from "@supabase/supabase-js";
 
-export default function Navbar() {
+export default function Navbar({ user }: { user: User | null }) {
   const [open, setOpen] = useState(false);
 
   const pathname = usePathname();
@@ -53,13 +54,20 @@ export default function Navbar() {
         </div>
       </div>
       <div className="flex gap-2 items-center">
-        <Button className="hidden lg:flex" variant={"ghost"}>
-          <Link href="/login">Log in</Link>
-        </Button>
-        <Button>
-          <Link href="/register">Get started today</Link>
-        </Button>
-
+        {user ? (
+          <Button asChild>
+            <Link href={"/dashboard"}>Dashboard</Link>
+          </Button>
+        ) : (
+          <>
+            <Button className="hidden lg:flex" variant={"ghost"}>
+              <Link href="/login">Log in</Link>
+            </Button>
+            <Button>
+              <Link href="/register">Get started today</Link>
+            </Button>
+          </>
+        )}
         <div className=" lg:hidden ">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -73,7 +81,10 @@ export default function Navbar() {
                 <HambergerMenu className="h-10 w-10" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="space-y-4">
+            <SheetContent
+              side="right"
+              className="space-y-4 bg-inherit border-l-gray-900"
+            >
               <Link href="/">
                 <Logo />
               </Link>
@@ -94,20 +105,27 @@ export default function Navbar() {
                 </div>
               </nav>
               <SheetFooter className="flex flex-col gap-4 w-full pt-4">
-                <div className="flex items-center gap-2">
-                  {" "}
-                  <Button size={"lg"} asChild onClick={() => setOpen(false)}>
-                    <Link href={"/register"}>Get started</Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size={"lg"}
-                    variant={"secondary"}
-                    onClick={() => setOpen(false)}
-                  >
-                    <Link href={"/login"}> Log in</Link>
-                  </Button>
-                </div>
+                {user ? (
+                  <div className="flex justify-end">
+                    <Button asChild>
+                      <Link href={"/dashboard"}>Dashboard</Link>
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Button size={"lg"} asChild onClick={() => setOpen(false)}>
+                      <Link href={"/register"}>Get started</Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size={"lg"}
+                      variant={"secondary"}
+                      onClick={() => setOpen(false)}
+                    >
+                      <Link href={"/login"}> Log in</Link>
+                    </Button>
+                  </div>
+                )}
               </SheetFooter>
             </SheetContent>
           </Sheet>

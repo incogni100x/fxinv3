@@ -14,6 +14,7 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
+  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { OtpSchema } from "@/schemas/auth";
@@ -25,10 +26,21 @@ import { FormError } from "@/components/ui/form-error";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function VerifyOtpForm() {
+import { verifyOtp } from "@/actions/auth";
+import { postEmail } from "@/lib/utils";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+
+export default function VerifyOtpForm({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const router = useRouter();
+
   const form = useForm<z.infer<typeof OtpSchema>>({
     resolver: zodResolver(OtpSchema),
     defaultValues: {
@@ -36,9 +48,9 @@ export default function VerifyOtpForm() {
     },
   });
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [countdownTime, setCountdownTime] = useState(59); // Start at 59 seconds
-  const [loading, setLoading] = useState(false); // For the resend button loading state
+  const [loading, setLoading] = useState(false);
 
   // Utility function to format the countdown as MM:SS
   const formatTime = (timeInSeconds: number) => {
@@ -49,20 +61,21 @@ export default function VerifyOtpForm() {
       "0"
     )}`;
   };
+
   useEffect(() => {
     // Start the countdown when the component mounts
     startCountdown();
 
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current as NodeJS.Timeout); // Type assertion for NodeJS.Timeout
+        clearInterval(intervalRef.current); // Type assertion for NodeJS.Timeout
       }
     };
   }, []);
 
   const startCountdown = () => {
     if (intervalRef.current) {
-      clearInterval(intervalRef.current as NodeJS.Timeout); // Type assertion for NodeJS.Timeout
+      clearInterval(intervalRef.current);
     }
     setCountdownTime(59); // Reset to 59 seconds
     setLoading(true); // Disable resend button during countdown
@@ -79,54 +92,52 @@ export default function VerifyOtpForm() {
     }, 1000);
   };
   const onResend = async () => {
-    const email = sessionStorage.getItem("email");
-    if (!email) {
-      setError("Email is required");
+    setIsPending(true);
+    if (!password) {
+      toast.error("Password is required");
     }
     // const values = {
     //   value: email,
     //   otp_type: "email",
     // };
     try {
-      setLoading(true);
+      const json = await postEmail({
+        email,
+        password,
+      });
 
-      //   const data = response.data;
-      //   if (response.status === 201 && data.status == true) {
-      //     toast.success(data.message);
-      //     startCountdown();
-      //   }
+      if (json.error) {
+        toast.error("Fail to resend email");
+      } else {
+        toast.success("Please check your email.");
+      }
+      setIsPending(false);
     } catch (err: unknown) {
       //@ts-expect-error - The error object is of type unknown
       setError(err?.response?.message || "Oops,Something went wrong");
       //@ts-expect-error - The error object is of type unknown
       console.log(err.response);
     } finally {
-      setLoading(false);
+      setIsPending(false);
     }
   };
   const onSubmit = async (values: z.infer<typeof OtpSchema>) => {
     console.log(values);
-
+    setIsPending(true);
     try {
-      const email = sessionStorage.getItem("email");
-      if (!email) {
-        setError("Email is required");
+      const res = await verifyOtp({
+        email,
+        otp: values.otp,
+        type: "email",
+      });
+
+      if (res.error) {
+        setError(res.error);
+      } else {
+        setError(undefined);
+        toast.success(res.success);
+        router.push("/");
       }
-      setIsPending(true);
-      //   const payload = {
-      //     otp_type: "email",
-      //     otp: values.otp,
-      //     email,
-      //   };
-      //   const response = await authAxios.post(`/verify-email`, payload);
-      //   console.log(response);
-      //   const data = response.data;
-      //   if (response.status === 201 && data.status === true) {
-      //     toast.success(data.message);
-      //     router.refresh();
-      //     router.push("/business-onboarding");
-      //     sessionStorage.setItem("authStep", "3");
-      //   }
     } catch (err: unknown) {
       //@ts-expect-error - The error object is of type unknown
       setError(err?.response?.data.message || "Oops,Something went wrong");
@@ -140,70 +151,68 @@ export default function VerifyOtpForm() {
   };
 
   return (
-    <FormWrapper
-      Label="Email Verification"
-      description="An OTP has been sent to your email address. Please enter the 6-digit code below to verify your account."
-      currentStep="2"
-      lastStep="4"
-    >
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 flex justify-center items-center flex-col"
-        >
-          <FormError message={error} />
-          <FormField
-            control={form.control}
-            name="otp"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <InputOTP maxLength={6} {...field}>
-                    <InputOTPGroup className="gap-2">
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                    </InputOTPGroup>
-                  </InputOTP>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 flex justify-center items-center flex-col"
+      >
+        <FormError message={error} />
+        <FormField
+          control={form.control}
+          name="otp"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <InputOTP pattern={REGEXP_ONLY_DIGITS} maxLength={6} {...field}>
+                  <InputOTPGroup className="gap-2">
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                  </InputOTPGroup>
+
+                  <InputOTPGroup className="gap-2">
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Verify OTP Button */}
+        <div className="flex justify-center gap-2 items-center pt-4 pb-2">
+          <Button
+            type="submit"
+            size="lg"
+            className="w-fit"
+            disabled={isPending} // OTP verification is not affected by countdown
+          >
+            {isPending ? (
+              <Spinner width={24} height={24} />
+            ) : (
+              <span>Verify OTP</span>
             )}
-          />
+          </Button>
+        </div>
 
-          {/* Verify OTP Button */}
-          <div className="flex justify-center items-center pt-4 pb-2">
-            <Button
-              type="submit"
-              size="lg"
-              className="w-fit"
-              disabled={isPending} // OTP verification is not affected by countdown
-            >
-              {isPending ? (
-                <Spinner width={24} height={24} />
-              ) : (
-                <span>Verify OTP</span>
-              )}
-            </Button>
-          </div>
-
-          {/* Resend OTP */}
-          <div className="flex justify-center items-center text-neutral-600 tracking-tight">
-            {countdownTime > 0 && <span>Resend in</span>}
-            <Button
-              variant="link"
-              className="text-base px-1 py-0"
-              onClick={onResend}
-              disabled={countdownTime > 0 || loading}
-            >
-              {countdownTime > 0
-                ? `${formatTime(countdownTime)} seconds`
-                : "Resend code"}
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </FormWrapper>
+        {/* Resend OTP */}
+        <div className="flex justify-center items-center text-neutral-600 tracking-tight">
+          {countdownTime > 0 && (
+            <span>Resend in {formatTime(countdownTime)}</span>
+          )}
+          <Button
+            variant="link"
+            className="text-base px-1 py-0"
+            onClick={onResend}
+            disabled={countdownTime > 0 || isPending}
+          >
+            {countdownTime > 0 ? "" : "Resend code"}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

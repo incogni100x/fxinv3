@@ -52,8 +52,8 @@ export const LoginSchema = z.object({
 export const OtpSchema = z.object({
   otp: z
     .string()
-    .min(4, "OTP must be 6 characters")
-    .max(4, "OTP must be 6 characters"),
+    .min(6, "OTP must be 6 characters")
+    .max(6, "OTP must be 6 characters"),
 });
 export const BusinessTypeSchema = z.object({
   business_type: z.string().min(4, { message: "Select a business type" }),
@@ -87,3 +87,9 @@ export const NewPasswordSchema = z
     message: "Passwords do not match!",
     path: ["confirmPassword"],
   });
+
+export const ResetPasswordSchema = z.object({
+  email: z.string().email({
+    message: "Email is required",
+  }),
+});
