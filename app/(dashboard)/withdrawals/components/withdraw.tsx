@@ -4,12 +4,7 @@ import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import FormButton from "@/components/ui/form-button";
@@ -28,11 +23,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+
 import { toast } from "sonner";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 
-import { MessageAdd } from "iconsax-react";
 import { MailPlus } from "lucide-react";
 import { Withdrawal } from "@/actions/transactions";
 import { useRouter } from "next/navigation";

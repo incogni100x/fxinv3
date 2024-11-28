@@ -1,5 +1,5 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -7,23 +7,13 @@ import {
   SheetFooter,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-
-import { PackageIcon, Settings } from "lucide-react";
-import Image from "next/image";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import {
-  HambergerMenu,
-  Home,
-  MoneyAdd,
-  MoneySend,
-  User as UserIcon,
-} from "iconsax-react";
+import { HambergerMenu, Home, MoneyAdd, MoneySend } from "iconsax-react";
 import Logo from "@/components/logo";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
 import { User } from "@supabase/supabase-js";
 import { UserButton } from "@/components/user-button";
 
