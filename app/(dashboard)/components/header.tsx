@@ -39,13 +39,13 @@ export default function DashboardHeader({ user }: { user: User | null }) {
       active: pathname === "/overview",
     },
     {
-      name: "Deposits",
+      name: "Deposit",
       href: "/deposits",
       icon: <MoneyAdd className="h-4 w-4" />,
       active: pathname.startsWith("/deposits"),
     },
     {
-      name: "Withdrawals",
+      name: "Withdrawal",
       href: `/withdrawals`,
       icon: <MoneySend className="h-4 w-4" />,
       active: pathname === "/withdrawals",

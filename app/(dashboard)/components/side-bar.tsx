@@ -32,7 +32,7 @@ export default function SideBar({ user }: { user: User }) {
     },
     {
       name: "Withdrawal",
-      href: `/withdrawal`,
+      href: `/withdrawals`,
       icon: MinusCirlce,
       active: pathname === "/withdrawals",
     },

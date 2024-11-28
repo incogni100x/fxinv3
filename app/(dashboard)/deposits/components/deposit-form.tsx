@@ -34,6 +34,7 @@ import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { MailPlus } from "lucide-react";
 import { Deposit } from "@/actions/transactions";
 import { useRouter } from "next/navigation";
+import { FormInfo } from "@/components/ui/form-info";
 
 // Schema for validation
 export const DepositSchema = z.object({
@@ -116,7 +117,7 @@ export default function DepositForm() {
           } else {
             form.reset();
             toast.success(data.success);
-            router.push("/transaction/history");
+            router.push("/transaction-history");
           }
         })
         .catch(() => toast.error("Oops! Something went wrong!"));
@@ -134,6 +135,7 @@ export default function DepositForm() {
           onSubmit={form.handleSubmit(handleFormSubmit)}
           className="space-y-6"
         >
+          <FormInfo message="Please ensure you are sending payment to the right address .Double check before confirming the transaction " />
           <div className="space-y-4">
             <Label>Deposit Method</Label>
             <FormField

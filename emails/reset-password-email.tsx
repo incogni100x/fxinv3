@@ -24,9 +24,9 @@ export default function SupaAuthResetEmail({
       <Body style={main}>
         <Container style={container}>
           <Section style={coverSection}>
-            <Section style={imageSection}>Reset Your Password</Section>
+            <Section style={imageSection}></Section>
             <Section style={upperSection}>
-              <Heading style={h1}> </Heading>
+              <Heading style={h1}>Reset Your Password </Heading>
               <Text style={mainText}>
                 {
                   "We received a request to reset your password. If you made this request, please use the verification code below to proceed. If you didn't request a password reset, you can safely ignore this email."
