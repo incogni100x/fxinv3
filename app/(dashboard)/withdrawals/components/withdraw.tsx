@@ -320,7 +320,7 @@ export default function WithdrawalForm() {
           />
         </form>
       </Form>
-      {/* Withdrawal Request Submitted Dialog */}
+
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <div className="text-center flex justify-center items-center flex-col space-y-4">
