@@ -80,7 +80,7 @@ export default function LoginForm() {
             />
             <div className="flex justify-end items-center  tracking-tight">
               <Link
-                className="p-0 font-normal text-primary"
+                className=" font-normal text-primary"
                 href="/forgot-password"
               >
                 Forgot password?

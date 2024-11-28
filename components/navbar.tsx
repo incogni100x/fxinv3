@@ -60,10 +60,10 @@ export default function Navbar({ user }: { user: User | null }) {
           </Button>
         ) : (
           <>
-            <Button className="hidden lg:flex" variant={"ghost"}>
+            <Button className="hidden lg:flex" asChild variant={"ghost"}>
               <Link href="/login">Log in</Link>
             </Button>
-            <Button>
+            <Button asChild>
               <Link href="/register">Get started today</Link>
             </Button>
           </>

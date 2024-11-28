@@ -59,6 +59,8 @@ export default function RegisterForm() {
       const json = await postEmail({
         email: values.email,
         password: values.password,
+        first_name: values.first_name,
+        last_name: values.last_name,
       });
 
       if (!json.error) {
@@ -268,6 +270,9 @@ export default function RegisterForm() {
             </DialogDescription>
           </DialogHeader>
           <VerifyOtpForm
+            first_name={form.getValues("first_name")}
+            last_name={form.getValues("last_name")}
+            url="/investments"
             email={form.getValues("email")}
             password={form.getValues("password")}
           />

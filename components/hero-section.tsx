@@ -33,7 +33,7 @@ export default function HeroSection() {
         />
       </div>
       <div className=" w-full flex justify-center flex-col">
-        <TickerTape colorTheme="dark" />
+        <TickerTape displayMode="regular" colorTheme="dark" />
       </div>
     </div>
   );

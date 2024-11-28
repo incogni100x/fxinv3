@@ -1,6 +1,7 @@
 "use server";
 
 import { createSupabaseServer } from "@/lib/supabase/server";
+import supabaseAdmin from "@/lib/supabase/admin";
 
 import { redirect } from "next/navigation";
 import {
@@ -12,10 +13,11 @@ import {
 
 import * as z from "zod";
 
-import { Provider } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { getURL } from "@/lib/utils";
-
+import { Resend } from "resend";
+import SupaAuthResetEmail from "@/emails/reset-password-email";
+const resend = new Resend(process.env.RESEND_API_KEY);
 export const verifyOtp = async (data: {
   email: string | null;
   otp: string;
@@ -25,7 +27,7 @@ export const verifyOtp = async (data: {
   if (!data.email) {
     return { error: "Email is required" };
   }
-  const { data: res, error } = await supabase.auth.verifyOtp({
+  const { error } = await supabase.auth.verifyOtp({
     email: data.email,
     token: data.otp,
     type: "email",
@@ -51,7 +53,7 @@ export async function signIn(
 
   const user = validatedFields.data;
 
-  const { data, error } = await supabase.auth.signInWithPassword(user);
+  const { error } = await supabase.auth.signInWithPassword(user);
 
   if (error) {
     return { error: error.message };
@@ -78,12 +80,12 @@ export async function newPassword(values: z.infer<typeof NewPasswordSchema>) {
   if (error) {
     return { error: error.message };
   }
-  redirect("/account");
+  return { success: "Password Updated" };
 }
 
 export async function reset(values: z.infer<typeof ForgotPasswordSchema>) {
   try {
-    const supabase = createSupabaseServer();
+    const supabase = supabaseAdmin();
     const validatedFields = ForgotPasswordSchema.safeParse(values);
 
     if (!validatedFields.success) {
@@ -92,14 +94,28 @@ export async function reset(values: z.infer<typeof ForgotPasswordSchema>) {
 
     const { email } = validatedFields.data;
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${url}/api/reset-password`,
+    const { data, error } = await supabase.auth.admin.generateLink({
+      type: "recovery",
+      email,
     });
 
     if (error) {
       return { error: error.message };
     }
-    return { success: `A link has been sent to your email ${email} ` };
+
+    // resend email
+    const { error: resendError } = await resend.emails.send({
+      from: `Elite Pro Markets <support@${process.env.RESEND_DOMAIN}>`,
+      to: [email],
+      subject: "Reset Password",
+      react: SupaAuthResetEmail({
+        verificationCode: data.properties?.email_otp,
+      }),
+    });
+    if (resendError) {
+      return { error: resendError.message };
+    }
+    return { success: `A otp has been sent to your email ${email} ` };
   } catch (error) {
     console.error("Error in Reset:", error);
     return { error: "An unexpected error occurred during sending reset email" };
@@ -206,22 +222,4 @@ export const logout = async () => {
   }
   revalidatePath("/", "layout");
   redirect("/");
-};
-
-export const verify = async (email: string | null) => {
-  if (!email) {
-    return { error: "Email is required" };
-  }
-
-  const supabase = createSupabaseServer();
-
-  const { data, error } = await supabase.auth.resend({
-    type: "signup",
-    email: email!,
-  });
-
-  if (error) {
-    return { error: error.message };
-  }
-  return { success: "Email sent" };
 };

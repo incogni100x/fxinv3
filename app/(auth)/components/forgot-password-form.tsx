@@ -23,11 +23,20 @@ import { FormWrapper } from "./form-wrapper";
 import { Button } from "@/components/ui/button";
 import { reset } from "@/actions/auth";
 import { FormSuccess } from "@/components/ui/form-success";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import VerifyOtpForm from "./verify-otp";
 
 export default function ForgotPasswordForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
+  const [isOtpDialogOpen, setOtpDialogOpen] = useState(false);
 
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),
@@ -46,9 +55,9 @@ export default function ForgotPasswordForm() {
             setError(data.error);
           }
           if (data?.success) {
-            form.reset();
             setError("");
             setSuccess(data.success);
+            setOtpDialogOpen(true);
           }
         })
         .catch(() => setError("Oops! Something went wrong!"));
@@ -87,7 +96,7 @@ export default function ForgotPasswordForm() {
             <FormButton
               isPending={isPending}
               size={"lg"}
-              title="Send reset link"
+              title="Reset Password"
             />
 
             <Button
@@ -101,6 +110,25 @@ export default function ForgotPasswordForm() {
           </div>
         </form>
       </Form>
+      <Dialog open={isOtpDialogOpen} onOpenChange={setOtpDialogOpen}>
+        <DialogContent
+          className="sm:max-w-[425px]"
+          onInteractOutside={(e) => e.preventDefault()}
+        >
+          <DialogHeader>
+            <DialogTitle>Email Verification</DialogTitle>
+            <DialogDescription>
+              An OTP has been sent to your email address. Please enter the
+              6-digit code below to verify your account.
+            </DialogDescription>
+          </DialogHeader>
+          <VerifyOtpForm
+            url="/new-password"
+            email={form.getValues("email")}
+            resetPassword
+          />
+        </DialogContent>
+      </Dialog>
     </FormWrapper>
   );
 }

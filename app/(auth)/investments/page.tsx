@@ -1,6 +1,9 @@
 import React from "react";
-import BusinessTypeForm from "../components/investment-form";
 
-export default function InvestmentsPage() {
-  return <BusinessTypeForm />;
+import InvestmentPlansForm from "../components/investment-form";
+import { getInvestmentPlans } from "@/data/fetch-data";
+
+export default async function InvestmentsPage() {
+  const fetchedPlans = await getInvestmentPlans();
+  return <InvestmentPlansForm investmentPlans={fetchedPlans} />;
 }

@@ -21,6 +21,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import FormButton from "@/components/ui/form-button";
 import { FormWrapper } from "./form-wrapper";
 import { newPassword } from "@/actions/auth";
+import { toast } from "sonner";
 
 export default function NewPasswordForm() {
   const [isPending, startTransition] = useTransition();
@@ -41,6 +42,8 @@ export default function NewPasswordForm() {
           if (data?.error) {
             form.reset();
             setError(data.error);
+          } else {
+            toast.success(data.success);
           }
         })
         .catch(() => setError("Oops! Something went wrong!"));

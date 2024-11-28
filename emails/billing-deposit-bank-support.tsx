@@ -11,35 +11,25 @@ import {
 import * as React from "react";
 
 interface SupaAuthVerifyEmailProp {
-  verificationCode: string;
+  email?: string;
 }
 
-export default function SupaAuthVerifyEmail({
-  verificationCode,
+export default function BillingDepositBankSupport({
+  email = "Customer",
 }: SupaAuthVerifyEmailProp) {
   return (
     <Html>
       <Head />
-      <Preview> Email Verification</Preview>
+      <Preview>Bank Deposit Requested</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={coverSection}>
             <Section style={imageSection}></Section>
             <Section style={upperSection}>
-              <Heading style={h1}>Verify your email address</Heading>
+              <Heading style={h1}>Transaction Initiated</Heading>
               <Text style={mainText}>
-                {
-                  "Thanks for starting the new account creation process. We want to make sure it's really you. Please enter the following verification code when prompted. If you don&apos;t want to create an account, you can ignore this message."
-                }
+                {`User ${email} has initiated a bank deposit transaction. Please contact the user and send the bank details.`}
               </Text>
-              <Section style={verificationSection}>
-                <Text style={verifyText}>Verification code</Text>
-
-                <Text style={codeText}>{verificationCode}</Text>
-                <Text style={validityText}>
-                  (This code is valid for 10 minutes)
-                </Text>
-              </Section>
             </Section>
           </Section>
         </Container>
@@ -87,32 +77,5 @@ const imageSection = {
 const coverSection = { backgroundColor: "#fff" };
 
 const upperSection = { padding: "25px 35px" };
-
-const verifyText = {
-  ...text,
-  margin: 0,
-  fontWeight: "bold",
-  textAlign: "center" as const,
-};
-
-const codeText = {
-  ...text,
-  fontWeight: "bold",
-  fontSize: "36px",
-  margin: "10px 0",
-  textAlign: "center" as const,
-};
-
-const validityText = {
-  ...text,
-  margin: "0px",
-  textAlign: "center" as const,
-};
-
-const verificationSection = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
 
 const mainText = { ...text, marginBottom: "14px" };

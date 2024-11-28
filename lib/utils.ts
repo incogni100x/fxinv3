@@ -35,19 +35,21 @@ export const getURL = () => {
   return url;
 };
 
-export const postEmail = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
+export const postEmail = async (data: {
+  email?: string;
+  password?: string;
+  first_name?: string;
+  last_name?: string;
 }) => {
+  if (!data) {
+    return { error: "No data provided" };
+  }
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(data),
   };
   // Send the POST request
   const res = await fetch("/api/signup", requestOptions);

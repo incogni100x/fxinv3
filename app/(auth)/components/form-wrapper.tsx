@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ interface CardWrapperProps {
   description?: string;
   currentStep?: string;
   lastStep?: string;
+  className?: string;
 }
 
 export const FormWrapper = ({
@@ -21,9 +23,10 @@ export const FormWrapper = ({
   description,
   currentStep,
   lastStep,
+  className,
 }: CardWrapperProps) => {
   return (
-    <Card className="w-full  rounded-lg py-10">
+    <Card className={cn("w-full  rounded-lg py-10", className)}>
       <CardHeader className=" flex items-center justify-center text-center space-y-4">
         {currentStep && lastStep && (
           <h3 className="text-sm text-primary">

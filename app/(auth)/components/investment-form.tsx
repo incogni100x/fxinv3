@@ -19,47 +19,27 @@ import FormButton from "@/components/ui/form-button";
 import { TickCircle } from "iconsax-react";
 import { InvestmentPlanSchema } from "@/schemas/onboarding";
 import { createOnboarding } from "@/actions/on-boarding";
+import { InvestmentPlan } from "@prisma/client";
+import { plans } from "@/components/subscription-plans";
 
-export const plans = [
-  {
-    name: "bronze",
-    description: "Best option for personal use & for your next project.",
-    price: 1000,
-    weeklyEarnings: "10%",
-    roi: "1,750",
-    color: "bg-orange-100 border-orange-400",
-    iconColor: "text-orange-400",
-  },
-  {
-    name: "silver",
-    description: "Relevant for multiple users, extended & premium support.",
-    price: 20000,
-    weeklyEarnings: "15%",
-    roi: "117,500",
-    color: "bg-gray-100 border-gray-400",
-    iconColor: "text-gray-400",
-  },
-  {
-    name: "gold",
-    description: "Relevant for multiple users, extended & premium support.",
-    price: 50000,
-    weeklyEarnings: "20%",
-    roi: "350,000",
-    color: "bg-yellow-100 border-yellow-400",
-    iconColor: "text-yellow-400",
-  },
-  {
-    name: "diamond",
-    description: "Relevant for high-net-worth individuals and businesses.",
-    price: 100000,
-    weeklyEarnings: "20%",
-    roi: "750,000",
-    color: "bg-blue-100 border-blue-400",
-    iconColor: "text-blue-400",
-  },
-];
+export default function InvestmentPlansForm({
+  investmentPlans,
+}: {
+  investmentPlans: InvestmentPlan[];
+}) {
+  const mergedPlans = plans.map((staticPlan) => {
+    const dbPlan = investmentPlans.find(
+      (invPlan) => invPlan.name.toLowerCase() === staticPlan.name.toLowerCase()
+    );
 
-export default function InvestmentPlansForm() {
+    return {
+      ...staticPlan,
+      id: dbPlan?.id || staticPlan.name, // Use ID from DB or fallback to name
+      interestRate: dbPlan?.interestRate || null,
+      durationDays: dbPlan?.durationDays || "N/A",
+    };
+  });
+
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
 
@@ -105,16 +85,16 @@ export default function InvestmentPlansForm() {
                     disabled={isPending}
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
                   >
-                    {plans.map((plan) => (
+                    {mergedPlans.map((plan) => (
                       <label
                         key={plan.name}
                         className={`relative flex flex-col items-start justify-between border rounded-md p-6 cursor-pointer transition-colors ${
-                          field.value === plan.name
+                          field.value === plan.id
                             ? `${plan.color} border-2`
                             : "border-gray-300"
                         }`}
                       >
-                        {field.value === plan.name && (
+                        {field.value === plan.id && (
                           <TickCircle
                             variant="Bold"
                             size="24"
@@ -136,7 +116,7 @@ export default function InvestmentPlansForm() {
                             ROI: ${plan.roi.toLocaleString()}
                           </p>
                         </div>
-                        <RadioGroupItem value={plan.name} className="hidden" />
+                        <RadioGroupItem value={plan.id} className="hidden" />
                       </label>
                     ))}
                   </RadioGroup>

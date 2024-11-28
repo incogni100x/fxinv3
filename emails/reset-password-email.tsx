@@ -10,26 +10,26 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface SupaAuthVerifyEmailProp {
+interface SupaAuthResetEmailProp {
   verificationCode: string;
 }
 
-export default function SupaAuthVerifyEmail({
+export default function SupaAuthResetEmail({
   verificationCode,
-}: SupaAuthVerifyEmailProp) {
+}: SupaAuthResetEmailProp) {
   return (
     <Html>
       <Head />
-      <Preview> Email Verification</Preview>
+      <Preview>Password Reset Request</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={coverSection}>
-            <Section style={imageSection}></Section>
+            <Section style={imageSection}>Reset Your Password</Section>
             <Section style={upperSection}>
-              <Heading style={h1}>Verify your email address</Heading>
+              <Heading style={h1}> </Heading>
               <Text style={mainText}>
                 {
-                  "Thanks for starting the new account creation process. We want to make sure it's really you. Please enter the following verification code when prompted. If you don&apos;t want to create an account, you can ignore this message."
+                  "We received a request to reset your password. If you made this request, please use the verification code below to proceed. If you didn't request a password reset, you can safely ignore this email."
                 }
               </Text>
               <Section style={verificationSection}>
@@ -38,6 +38,11 @@ export default function SupaAuthVerifyEmail({
                 <Text style={codeText}>{verificationCode}</Text>
                 <Text style={validityText}>
                   (This code is valid for 10 minutes)
+                </Text>
+                <Text style={mainText}>
+                  {
+                    "If you have any questions or encounter any issues, feel free to reach out to our support team."
+                  }
                 </Text>
               </Section>
             </Section>

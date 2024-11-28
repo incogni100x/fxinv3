@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     options: {
       data: {
         first_name: data.first_name,
-        last_name: data.last,
+        last_name: data.last_name,
       },
     },
   });

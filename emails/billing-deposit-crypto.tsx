@@ -11,34 +11,31 @@ import {
 import * as React from "react";
 
 interface SupaAuthVerifyEmailProp {
-  verificationCode: string;
+  wallet: string;
+  email?: string;
 }
 
-export default function SupaAuthVerifyEmail({
-  verificationCode,
+export default function BillingDepositCrypto({
+  wallet,
+  email = "Customer",
 }: SupaAuthVerifyEmailProp) {
   return (
     <Html>
       <Head />
-      <Preview> Email Verification</Preview>
+      <Preview> Deposit Crypto</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={coverSection}>
             <Section style={imageSection}></Section>
             <Section style={upperSection}>
-              <Heading style={h1}>Verify your email address</Heading>
+              <Heading style={h1}>Transaction Initiated</Heading>
               <Text style={mainText}>
-                {
-                  "Thanks for starting the new account creation process. We want to make sure it's really you. Please enter the following verification code when prompted. If you don&apos;t want to create an account, you can ignore this message."
-                }
+                {`User ${email} has initiated a transaction. Please verify the transaction details and approve it.`}
               </Text>
               <Section style={verificationSection}>
-                <Text style={verifyText}>Verification code</Text>
+                <Text style={verifyText}>Wallet </Text>
 
-                <Text style={codeText}>{verificationCode}</Text>
-                <Text style={validityText}>
-                  (This code is valid for 10 minutes)
-                </Text>
+                <Text style={codeText}>{wallet}</Text>
               </Section>
             </Section>
           </Section>
@@ -100,12 +97,6 @@ const codeText = {
   fontWeight: "bold",
   fontSize: "36px",
   margin: "10px 0",
-  textAlign: "center" as const,
-};
-
-const validityText = {
-  ...text,
-  margin: "0px",
   textAlign: "center" as const,
 };
 

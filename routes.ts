@@ -22,7 +22,7 @@ export const publicRoutes = [
 export const authRoutes = [
   "/login",
   "/register",
-  "/reset-password",
+  "/forgot-password",
   "/verify",
   "/error",
 ];
