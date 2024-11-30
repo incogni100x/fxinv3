@@ -67,9 +67,9 @@ export default function DashboardHeader({ user }: { user: User | null }) {
   return (
     <div className="top-0 z-50 bg-gray-800/40 border-b border-gray-800 sticky">
       <div className="container mx-auto">
-        <header className="flex h-14 lg:h-[60px] items-center justify-between gap-4 px-6">
+        <header className="flex h-14 lg:h-[60px] items-center justify-between gap-4 px-4">
           {/* Dynamic Route Name */}
-          <div className="flex items-center gap-2">
+          <div className="flex py-1 items-center gap-2">
             <Link href="/" className="lg:hidden">
               <Logo />
             </Link>
@@ -79,11 +79,8 @@ export default function DashboardHeader({ user }: { user: User | null }) {
           </div>
 
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button size="icon" variant="link">
-                <span className="sr-only">Toggle menu</span>
-                <HambergerMenu className="h-6 w-6 text-white" />
-              </Button>
+            <SheetTrigger asChild className="lg:hidden p-2">
+              <HambergerMenu className="h-11 w-11 text-muted-foreground" />
             </SheetTrigger>
             <SheetContent
               side="right"
@@ -109,6 +106,7 @@ export default function DashboardHeader({ user }: { user: User | null }) {
                       asChild
                       key={nav.name}
                       className="text-start justify-start w-fit"
+                      onClick={() => setOpen(false)}
                       variant={nav.active ? "secondary" : "ghost"}
                     >
                       <Link href={nav.href}>{nav.name}</Link>

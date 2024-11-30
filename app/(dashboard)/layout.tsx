@@ -51,7 +51,7 @@ export default async function DashboardLayout({
 
         {/* Content */}
         <main className="flex-1 overflow-y-auto py-6">
-          <div className="container mx-auto px-6">{children}</div>
+          <div className="container mx-auto px-4">{children}</div>
         </main>
       </div>
     </div>

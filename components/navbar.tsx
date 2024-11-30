@@ -40,7 +40,7 @@ export default function Navbar({ user }: { user: User | null }) {
   ];
 
   return (
-    <header className="container py-5 lg:py-8 flex  mx-auto items-center justify-between">
+    <header className="container py-5 lg:py-8 flex  mx-auto items-center justify-between px-4">
       <div className=" flex items-center gap-4">
         <Link href="/">
           <Logo />
@@ -74,16 +74,8 @@ export default function Navbar({ user }: { user: User | null }) {
         )}
         <div className=" lg:hidden ">
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button
-                size="icon"
-                variant="link"
-                className="text-muted-foreground"
-              >
-                <span className="sr-only">Toggle menu</span>
-
-                <HambergerMenu className="h-10 w-10" />
-              </Button>
+            <SheetTrigger asChild className="p-1">
+              <HambergerMenu className="h-11 w-11 text-muted-foreground" />
             </SheetTrigger>
             <SheetContent
               side="right"

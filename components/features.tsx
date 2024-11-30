@@ -65,7 +65,7 @@ export function FeaturesSectionDemo() {
   return (
     <div className="bg-white lg:space-y-10 space-y-6 py-20">
       <div className="text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto  text-black">
-        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+        <h2 className="mb-4 text-3xl sm:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
           <span className="text-primary"> Invest</span> with Confidence
         </h2>
       </div>

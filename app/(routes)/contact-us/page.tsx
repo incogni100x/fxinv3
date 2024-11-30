@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ContactUsPage() {
   return (
-    <div className="py-24 flex justify-center items-center px-6 sm:px-12">
+    <div className="flex items-center justify-center min-h-screen py-18 lg:py-24 px-4">
       <ContactUs />
     </div>
   );
