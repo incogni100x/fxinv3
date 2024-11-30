@@ -1,3 +1,4 @@
+import { phoneSchema } from "@/components/phone-input-2";
 import * as z from "zod";
 
 export const SignUpSchema = z
@@ -101,10 +102,6 @@ export const ContactUsSchema = z.object({
 
   email: z.string().email({
     message: "Email is required",
-  }),
-
-  phoneNo: z.string().min(1, {
-    message: "Phone is required",
   }),
 
   message: z.string().min(1, {

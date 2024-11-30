@@ -15,7 +15,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { PhoneInput } from "@/components/phone-input";
 
 import { FormWrapper } from "@/app/(auth)/components/form-wrapper";
 import { ContactUsSchema } from "@/schemas/auth";
@@ -33,7 +32,9 @@ export function ContactUs() {
     resolver: zodResolver(ContactUsSchema),
     defaultValues: {
       name: "",
-      phoneNo: "",
+
+      email: "",
+      message: "",
     },
   });
 
@@ -103,39 +104,7 @@ export function ContactUs() {
               );
             }}
           />
-          <FormField
-            control={form.control}
-            name="phoneNo"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <Label>Phone number</Label>
-                  <FormControl>
-                    {/* <Input
-                            disabled={isPending}
-                            placeholder="081234567890"
-                            {...field}
-                            // onChange={(event) =>
-                            //   field.onChange(console.log(event.target.value))
-                            // }
-                            type="number"
-                          /> */}
 
-                    <PhoneInput
-                      {...field}
-                      defaultCountry="NG"
-                      onChange={field.onChange}
-                      disabled={isPending}
-                      // placeholder="Enter a phone number"
-                      international
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
           <FormField
             control={form.control}
             name="message"

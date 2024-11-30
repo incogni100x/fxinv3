@@ -13,14 +13,14 @@ import * as React from "react";
 interface SupportEmailProps {
   name: string;
   email: string;
-  phoneNo: string;
+
   message: string;
 }
 
 export default function SupportEmail({
   name,
   email,
-  phoneNo,
+
   message,
 }: SupportEmailProps) {
   return (
@@ -43,9 +43,7 @@ export default function SupportEmail({
                 <Text style={detailText}>
                   <strong>Email:</strong> {email}
                 </Text>
-                <Text style={detailText}>
-                  <strong>Phone Number:</strong> {phoneNo}
-                </Text>
+
                 <Text style={detailText}>
                   <strong>Message:</strong>
                 </Text>
