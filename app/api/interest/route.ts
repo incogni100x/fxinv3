@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       await prisma.transaction.create({
         data: {
           userId,
-          type: "deposit",
+          type: "interest",
           amount: dailyInterest,
           method: "interest",
           status: "approved",

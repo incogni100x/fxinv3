@@ -116,7 +116,7 @@ export function ContactUs() {
                 <FormControl>
                   <Textarea
                     placeholder="How can we help you?"
-                    className="resize-none h-48 p-6 bg-muted-foreground"
+                    className="resize-none h-48 p-6 bg-muted"
                     {...field}
                     disabled={isPending}
                   />
