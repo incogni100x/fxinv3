@@ -11,7 +11,7 @@ export default function HeroSection() {
   const words = "Empower Your Future with Smarter Investments";
   return (
     <div>
-      <div className="mx-auto max-w-[1545px] px-4 sm:px-6 lg:px-8 py-20 text-center lg:py-28 flex flex-col items-center justify-center">
+      <div className="mx-auto container px-4 sm:px-6 lg:px-8 py-20 text-center lg:py-28 flex flex-col items-center justify-center">
         <TextGenerateEffect words={words} />
         <p className="mx-auto mt-6 max-w-2xl text-base lg:text-lg tracking-tight text-muted-foreground">
           Our platform delivers unmatched security, expert support, and a

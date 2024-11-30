@@ -1,3 +1,4 @@
+import { Transaction } from "@prisma/client";
 import {
   Body,
   Container,
@@ -10,26 +11,61 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface SupaAuthVerifyEmailProp {
+interface BillingDepositEmailProp {
   email?: string;
+  transaction: Transaction;
 }
 
 export default function BillingDepositBankSupport({
   email = "Customer",
-}: SupaAuthVerifyEmailProp) {
+  transaction,
+}: BillingDepositEmailProp) {
   return (
     <Html>
       <Head />
-      <Preview>Bank Deposit Requested</Preview>
+      <Preview>
+        {transaction.method === "crypto"
+          ? "Crypto Deposit Requested"
+          : "Bank Deposit Requested"}
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={coverSection}>
             <Section style={imageSection}></Section>
             <Section style={upperSection}>
-              <Heading style={h1}>Transaction Initiated</Heading>
+              <Heading style={h1}>
+                {transaction.method === "crypto"
+                  ? "Crypto Transaction Initiated"
+                  : "Bank Deposit Initiated"}
+              </Heading>
               <Text style={mainText}>
-                {`User ${email} has initiated a bank deposit transaction. Please contact the user and send the bank details.`}
+                {`User ${email} has initiated a ${
+                  transaction.method === "crypto"
+                    ? "crypto deposit"
+                    : "bank deposit"
+                } transaction.`}
               </Text>
+
+              {/* Display details for crypto transaction */}
+              {transaction.method === "crypto" ? (
+                <>
+                  <Text style={mainText}>
+                    {`Amount: ${transaction.amount} ${transaction.currency}`}
+                  </Text>
+                  <Text style={mainText}>
+                    {`Transaction ID: ${transaction.id}`}
+                  </Text>
+                  <Text style={mainText}>
+                    {
+                      "Please contact the user and provide the necessary crypto details."
+                    }
+                  </Text>
+                </>
+              ) : (
+                <Text style={mainText}>
+                  {"Please contact the user and send the bank details."}
+                </Text>
+              )}
             </Section>
           </Section>
         </Container>

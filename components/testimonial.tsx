@@ -6,29 +6,29 @@ import { ArrowLeft, ArrowRight } from "iconsax-react";
 
 const testimonials = [
   {
-    name: "Michael O.",
-    role: "Forex Trader",
-    text: "FX Market Elite Pros has transformed my trading game. The analytics tools are unparalleled, giving me real-time insights that I can act on instantly.",
+    name: "James W.",
+    role: "Professional Forex Trader",
+    text: "Elite Pro Markets has revolutionized the way I trade. The platform's real-time analytics and smooth execution of trades have significantly boosted my profits.",
   },
   {
-    name: "Amanda T.",
-    role: "Freelance Financial Consultant",
-    text: "Managing my clients' accounts has never been easier. The intuitive dashboard saves me hours each week, letting me focus on what matters most.",
+    name: "Sophia K.",
+    role: "Financial Analyst",
+    text: "I’ve tried many platforms, but none come close to the user-friendly design and powerful tools of Elite Pro Markets. The customizable dashboard is a game-changer for managing multiple assets.",
   },
   {
-    name: "Samuel B.",
-    role: "Entrepreneur",
-    text: "I was skeptical at first, but after just one month, my financial tracking became seamless. The automation features are a game-changer!",
+    name: "Carlos M.",
+    role: "Investment Banker",
+    text: "As a professional, I need a platform that offers both security and innovation. Elite Pro Markets provides top-notch security features and seamless mobile trading. It's the best I’ve used so far.",
   },
   {
-    name: "Olivia M.",
-    role: "Crypto Enthusiast",
-    text: "I love how easily FX Market Elite Pros integrates with my crypto wallets. The multi-currency support is exactly what I needed.",
+    name: "Linda R.",
+    role: "Crypto Investor",
+    text: "Elite Pro Markets is the only platform that integrates all my crypto holdings in one place. The multi-currency support makes it incredibly convenient to manage both traditional and digital assets.",
   },
   {
-    name: "David R.",
+    name: "David T.",
     role: "Small Business Owner",
-    text: "Running a business is hard enough, but FX Market Elite Pros makes managing finances stress-free. Highly recommended!",
+    text: "Managing business finances has always been a hassle, but with Elite Pro Markets, everything from tracking to financial analysis is made simple and efficient. It's the perfect tool for modern businesses.",
   },
 ];
 
@@ -47,7 +47,7 @@ const TestimonialSection = () => {
               Built for today’s ambitious earners
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Thousands of forward-thinking users rely on FX Market Elite Pros
+              Thousands of forward-thinking users rely on Elite Pro Markets
               every day to turbo-charge their financial operations.
             </p>
           </div>

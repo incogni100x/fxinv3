@@ -5,13 +5,15 @@
  */
 export const publicRoutes = [
   "/",
-  "/privacy",
-  "/about",
+  "/privacy-policy",
+  "/about-us",
   "/faq",
+  "/terms-and-conditions",
   "/manifest.webmanifest",
   "/sitemap.xml",
   "/merchant",
   "/robots.txt",
+  "/contact-us",
 ];
 
 /**

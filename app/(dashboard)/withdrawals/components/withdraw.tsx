@@ -98,7 +98,7 @@ export default function WithdrawalForm() {
             form.reset();
             setDialogOpen(true);
             toast.success(data.success);
-            router.push("/transaction-history");
+            router.push("/transactions-history");
           }
         })
         .catch(() => toast.error("Oops! Something went wrong!"));
@@ -184,6 +184,7 @@ export default function WithdrawalForm() {
                       <Label>Address</Label>
                       <FormControl>
                         <Input
+                          className="bg-muted"
                           placeholder="Enter wallet address"
                           {...field}
                           disabled={isPending}
@@ -229,6 +230,7 @@ export default function WithdrawalForm() {
                       <Label>Account Name</Label>
                       <FormControl>
                         <Input
+                          className="bg-muted"
                           placeholder="Enter account name"
                           {...field}
                           disabled={isPending}
@@ -246,6 +248,7 @@ export default function WithdrawalForm() {
                       <Label>Account Number</Label>
                       <FormControl>
                         <Input
+                          className="bg-muted"
                           type="number"
                           placeholder="Enter account number"
                           {...field}
@@ -264,6 +267,7 @@ export default function WithdrawalForm() {
                       <Label>Bank Name</Label>
                       <FormControl>
                         <Input
+                          className="bg-muted"
                           placeholder="Enter bank name"
                           {...field}
                           disabled={isPending}
@@ -281,6 +285,7 @@ export default function WithdrawalForm() {
                       <Label>Routing number</Label>
                       <FormControl>
                         <Input
+                          className="bg-muted"
                           placeholder="Enter routing number"
                           type="number"
                           {...field}
@@ -301,6 +306,7 @@ export default function WithdrawalForm() {
                   <Label>Withdrawal Amount</Label>
                   <FormControl>
                     <Input
+                      className="bg-muted"
                       type="number"
                       placeholder="Enter amount"
                       {...field}

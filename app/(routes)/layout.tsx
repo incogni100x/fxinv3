@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { getUser } from "@/lib/supabase/user";
 
@@ -12,6 +13,7 @@ export default async function RoutesLayout({
     <section>
       <Navbar user={user} />
       {children}
+      <Footer />
     </section>
   );
 }

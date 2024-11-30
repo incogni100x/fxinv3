@@ -117,7 +117,7 @@ export default function DepositForm() {
           } else {
             form.reset();
             toast.success(data.success);
-            router.push("/transaction-history");
+            router.push("/transactions-history");
           }
         })
         .catch(() => toast.error("Oops! Something went wrong!"));

@@ -24,18 +24,18 @@ export default function Navbar({ user }: { user: User | null }) {
   const navigation = [
     {
       name: "About us",
-      href: "/legal",
-      active: pathname.startsWith("/legal"),
+      href: "/about-us",
+      active: pathname.startsWith("/about-us"),
     },
     {
       name: "Faq",
-      href: "/about",
-      active: pathname.startsWith("/about"),
+      href: "/faq",
+      active: pathname.startsWith("/faq"),
     },
     {
-      name: "Why us",
-      href: "/developers",
-      active: pathname.startsWith("/developers"),
+      name: "Contact us",
+      href: "/contact-us",
+      active: pathname.startsWith("/contact-us"),
     },
   ];
 
@@ -47,7 +47,11 @@ export default function Navbar({ user }: { user: User | null }) {
         </Link>
         <div className="lg:flex justify-between  hidden items-center gap-2">
           {navigation.map((nav) => (
-            <Button asChild key={nav.name} variant={"ghost"}>
+            <Button
+              asChild
+              key={nav.name}
+              variant={nav.active ? "secondary" : "ghost"}
+            >
               <Link href={nav.href}>{nav.name}</Link>
             </Button>
           ))}

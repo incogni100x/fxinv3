@@ -1,3 +1,4 @@
+import { Transaction } from "@prisma/client";
 import {
   Body,
   Container,
@@ -10,26 +11,47 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface SupaAuthVerifyEmailProp {
-  first_name?: string;
+interface BillingDepositEmailProp {
+  email?: string;
+  method: Transaction["method"];
 }
 
-export default function BillingDepositBank({
-  first_name = "Customer",
-}: SupaAuthVerifyEmailProp) {
+export default function BillingDepositEmail({
+  email = "Customer",
+  method,
+}: BillingDepositEmailProp) {
   return (
     <Html>
       <Head />
-      <Preview>Bank Deposit Requested</Preview>
+      <Preview>
+        {method === "crypto"
+          ? "Crypto Deposit Requested"
+          : "Bank Deposit Requested"}
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={coverSection}>
             <Section style={imageSection}></Section>
             <Section style={upperSection}>
-              <Heading style={h1}>Transaction Initiated</Heading>
+              <Heading style={h1}>
+                {method === "crypto"
+                  ? "Crypto Transaction Initiated"
+                  : "Bank Deposit Initiated"}
+              </Heading>
               <Text style={mainText}>
-                {`Dear ${first_name},a bank deposit transaction has been initiated ,our customer support will contact you shortly with the bank details.`}
+                {`Dear ${email}, a ${
+                  method === "crypto" ? "crypto deposit" : "bank deposit"
+                } transaction has been initiated.`}
               </Text>
+
+              {/* Display details for crypto transaction */}
+              {method === "bank" && (
+                <Text style={mainText}>
+                  {
+                    "Our customer support will contact you shortly with the bank details."
+                  }
+                </Text>
+              )}
             </Section>
           </Section>
         </Container>

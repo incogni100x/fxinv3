@@ -11,7 +11,14 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { HambergerMenu, Home, MoneyAdd, MoneySend } from "iconsax-react";
+import {
+  Coin1,
+  HambergerMenu,
+  Home,
+  I24Support,
+  MoneyAdd,
+  MoneySend,
+} from "iconsax-react";
 import Logo from "@/components/logo";
 
 import { User } from "@supabase/supabase-js";
@@ -40,6 +47,18 @@ export default function DashboardHeader({ user }: { user: User | null }) {
       icon: <MoneySend className="h-4 w-4" />,
       active: pathname === "/withdrawals",
     },
+    {
+      name: "Transactions History",
+      href: `/transactions-history`,
+      icon: Coin1,
+      active: pathname === "/transactions-history",
+    },
+    {
+      name: "Support",
+      href: `/support`,
+      icon: I24Support,
+      active: pathname === "/support",
+    },
   ];
 
   // Find the active route name
@@ -48,11 +67,16 @@ export default function DashboardHeader({ user }: { user: User | null }) {
   return (
     <div className="top-0 z-50 bg-gray-800/40 border-b border-gray-800 sticky">
       <div className="container mx-auto">
-        <header className="flex h-14 lg:h-[60px] items-center justify-between gap-4 px-4">
+        <header className="flex h-14 lg:h-[60px] items-center justify-between gap-4 px-6">
           {/* Dynamic Route Name */}
-          <h2 className="text-lg font-semibold text-gray-50">
-            {currentRoute || "Dashboard"}
-          </h2>
+          <div className="flex items-center gap-2">
+            <Link href="/" className="lg:hidden">
+              <Logo />
+            </Link>
+            <h2 className="text-lg font-semibold text-gray-50">
+              {currentRoute || "Dashboard"}
+            </h2>
+          </div>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="lg:hidden">
@@ -85,7 +109,7 @@ export default function DashboardHeader({ user }: { user: User | null }) {
                       asChild
                       key={nav.name}
                       className="text-start justify-start w-fit"
-                      variant={"ghost"}
+                      variant={nav.active ? "secondary" : "ghost"}
                     >
                       <Link href={nav.href}>{nav.name}</Link>
                     </Button>

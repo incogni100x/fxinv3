@@ -2,9 +2,9 @@ import React from "react";
 
 export default function TrustedSection() {
   return (
-    <div className="mx-auto  max-w-[1545px] px-6 lg:px-8 py-24 ">
-      <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-        <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+    <div className="mx-auto container px-6 lg:px-8 py-24 ">
+      <div className="mx-auto ">
+        <p className="mt-2 text-3xl text-center font-bold tracking-tight text-white sm:text-4xl">
           Trusted by thousands of users&nbsp;worldwide
         </p>
       </div>

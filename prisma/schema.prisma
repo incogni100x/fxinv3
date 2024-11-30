@@ -52,14 +52,27 @@ model Investment {
   createdAt  DateTime       @default(now())
 }
 
+// Enum definitions
+enum TransactionType {
+  deposit
+  withdrawal
+}
+
+enum TransactionStatus {
+  pending
+  approved
+  rejected
+}
+
+// Transaction model
 model Transaction {
-  id         String    @id @default(cuid())
+  id         String            @id @default(cuid())
   userId     String
-  type       String // "deposit" or "withdrawal"
+  type       TransactionType // "deposit" or "withdrawal"
   amount     Float
   method     String
   currency   String?
-  status     String    @default("pending") // "pending", "approved", "rejected"
-  createdAt  DateTime  @default(now())
+  status     TransactionStatus @default(pending) // "pending", "approved", "rejected"
+  createdAt  DateTime          @default(now())
   approvedAt DateTime?
 }

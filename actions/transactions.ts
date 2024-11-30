@@ -1,13 +1,17 @@
 "use server";
 import { DepositSchema } from "@/app/(dashboard)/deposits/components/deposit-form";
 import { withdrawalSchema } from "@/app/(dashboard)/withdrawals/components/withdraw";
-import BillingDepositBank from "@/emails/billing-deposit-bank";
+import BillingDepositEmail from "@/emails/billing-deposit-bank";
+
 import BillingDepositBankSupport from "@/emails/billing-deposit-bank-support";
-import BillingDepositCrypto from "@/emails/billing-deposit-crypto";
+
+import SupportEmail from "@/emails/support-email";
 import BillingWithdrawalNotification from "@/emails/withdrawal";
 import SupportWithdrawalNotificationEmail from "@/emails/withdrawal-support";
 import prisma from "@/lib/db";
 import { getUser } from "@/lib/supabase/user";
+import { ContactUsSchema } from "@/schemas/auth";
+import { Transaction } from "@prisma/client";
 import { User } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import * as z from "zod";
@@ -20,11 +24,35 @@ export const Deposit = async (values: z.infer<typeof DepositSchema>) => {
     return { error: "Unauthorized" };
   }
 
-  const emailAction =
-    values.method === "crypto" ? sendCryptoEmail : sendBankEmail;
+  // // Retrieve the user investment and plan in a single query using `include`
+  // const userInvestmentWithPlan = await prisma.investment.findFirst({
+  //   where: {
+  //     userId: user.id,
+  //   },
+  //   include: {
+  //     plan: true, // Include related investment plan
+  //   },
+  // });
+
+  // // Check if user has an active investment
+  // if (!userInvestmentWithPlan) {
+  //   return { error: "You need to have an active investment to make a deposit" };
+  // }
+
+  // const { plan: investment } = userInvestmentWithPlan;
+
+  // // Check if investment plan exists and validate minimum deposit
+  // if (!investment) {
+  //   return { error: "Investment Plan not found" };
+  // }
+  // if (investment.minAmount > Number(values.amount)) {
+  //   return {
+  //     error: `You need to send a minimum deposit of ${investment.minAmount} for your ${investment.name} plan`,
+  //   };
+  // }
 
   // Create the transaction
-  await prisma.transaction.create({
+  const transaction = await prisma.transaction.create({
     data: {
       type: "deposit",
       ...values,
@@ -34,38 +62,40 @@ export const Deposit = async (values: z.infer<typeof DepositSchema>) => {
   });
 
   // Send the appropriate email
-  const { error } = await emailAction(user, values);
+
+  const { error } = await sendBillingDepositEmail(user, transaction);
   if (error) {
     return { error: error.message };
   }
 
   return { success: "Transaction successfully initiated" };
 };
+
 export const Withdrawal = async (values: z.infer<typeof withdrawalSchema>) => {
   const user = await getUser();
   if (!user) {
     return { error: "Unauthorized" };
   }
 
-  // Check if the total approved deposits are enough to cover the withdrawal
-  const totalDeposits = await prisma.transaction.aggregate({
-    _sum: {
-      amount: true,
-    },
-    where: {
-      userId: user.id,
-      type: "deposit",
-      status: "approved", // Assuming you have a status field for approved deposits
-    },
-  });
+  // // Check if the total approved deposits are enough to cover the withdrawal
+  // const totalDeposits = await prisma.transaction.aggregate({
+  //   _sum: {
+  //     amount: true,
+  //   },
+  //   where: {
+  //     userId: user.id,
+  //     type: "deposit",
+  //     status: "approved", // Assuming you have a status field for approved deposits
+  //   },
+  // });
 
-  const totalApprovedDepositAmount = totalDeposits._sum.amount || 0;
+  // const totalApprovedDepositAmount = totalDeposits._sum.amount || 0;
 
-  if (totalApprovedDepositAmount < Number(values.amount)) {
-    return {
-      error: "Insufficient approved deposit amount for this withdrawal",
-    };
-  }
+  // if (totalApprovedDepositAmount < Number(values.amount)) {
+  //   return {
+  //     error: "Insufficient approved deposit amount for this withdrawal",
+  //   };
+  // }
 
   // Create the transaction
   await prisma.transaction.create({
@@ -106,39 +136,46 @@ export const Withdrawal = async (values: z.infer<typeof withdrawalSchema>) => {
   return { success: "Withdrawal request successfully initiated" };
 };
 
-const sendCryptoEmail = async (
+const sendBillingDepositEmail = async (
   user: User,
-  values: z.infer<typeof DepositSchema>
+  transaction: Transaction
 ) => {
-  return resend.emails.send({
-    from: `Elite Pro Markets <billing@${process.env.RESEND_DOMAIN}>`,
-    to: [`support@${process.env.RESEND_DOMAIN}`],
-    subject: "Deposit Initiated Crypto",
-    react: BillingDepositCrypto({
-      email: user.email,
-      wallet: values.currency,
-    }),
-  });
-};
-
-const sendBankEmail = async (user: User) => {
   return resend.batch.send([
     {
       from: `Elite Pro Markets <billing@${process.env.RESEND_DOMAIN}>`,
       to: [user.email as string],
       subject: "Deposit Initiated",
-      react: BillingDepositBank({
-        first_name: user.user_metadata.first_name,
+      react: BillingDepositEmail({
+        email: user.email,
+        method: transaction.method,
       }),
     },
     {
       from: `Elite Pro Markets <billing@${process.env.RESEND_DOMAIN}>`,
       replyTo: [`support@elitepromarkets.com`],
       to: [`support@${process.env.RESEND_DOMAIN}`],
-      subject: "Deposit Initiated Bank",
+      subject: "Deposit Initiated ",
       react: BillingDepositBankSupport({
-        email: user.user_metadata.first_name,
+        email: user.email,
+        transaction,
       }),
     },
   ]);
 };
+
+export async function contactUs(values: z.infer<typeof ContactUsSchema>) {
+  const validatedFields = ContactUsSchema.safeParse(values);
+
+  if (!validatedFields.success) {
+    return { error: "Invalid fields" };
+  }
+  const data = validatedFields.data;
+  await resend.emails.send({
+    from: `Elite Pro Markets <contact@${process.env.RESEND_DOMAIN}>`,
+    to: [`support@${process.env.RESEND_DOMAIN}`],
+    subject: "Contact Us",
+    react: SupportEmail(data),
+  });
+
+  return { success: "Message sent ,We would be in touch" };
+}

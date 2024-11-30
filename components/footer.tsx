@@ -3,7 +3,7 @@ import Logo from "./logo";
 
 export default function Footer() {
   return (
-    <div className="mx-auto max-w-[1545px] px-6 lg:px-8 pt-[16px] pb-[120px]">
+    <div className="mx-auto container  px-6 lg:px-8 pt-[16px] pb-[120px]">
       <div>
         <div className="w-full justify-between mt-[72px] grid gap-[32px] md:flex">
           {/* About Section */}
@@ -20,55 +20,6 @@ export default function Footer() {
                   About us
                 </a>
               </li>
-              <li>
-                <a
-                  href="/why-us"
-                  className="text-md leading-6 text-gray-300 hover:text-white"
-                >
-                  Why FX Market Elite Pros
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Earn Section */}
-          <div>
-            <h3 className="text-md font-medium leading-6 text-[#5D5F66]">
-              Earn
-            </h3>
-            <ul role="list" className="mt-6 space-y-4">
-              <li>
-                <a
-                  href="/crypto"
-                  className="text-md leading-6 text-gray-300 hover:text-white"
-                >
-                  Crypto
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/forex"
-                  className="text-md leading-6 text-gray-300 hover:text-white"
-                >
-                  Forex
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/stocks"
-                  className="text-md leading-6 text-gray-300 hover:text-white"
-                >
-                  Stocks
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/realestate"
-                  className="text-md leading-6 text-gray-300 hover:text-white"
-                >
-                  Real Estate
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -80,15 +31,7 @@ export default function Footer() {
             <ul role="list" className="mt-6 space-y-4">
               <li>
                 <a
-                  href="/legal"
-                  className="text-md leading-6 text-gray-300 hover:text-white"
-                >
-                  Legal
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/privacy"
+                  href="/privacy-policy"
                   className="text-md leading-6 text-gray-300 hover:text-white"
                 >
                   Privacy policy
@@ -96,7 +39,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/terms"
+                  href="/terms-and-conditions"
                   className="text-md leading-6 text-gray-300 hover:text-white"
                 >
                   Terms of service
@@ -167,7 +110,7 @@ export default function Footer() {
       {/* Footer Bottom Section */}
       <div className="border-white/10 md:flex md:items-center md:justify-between mt-[64px]">
         <p className="text-md leading-5 text-[#AEAFB2] md:order-1 md:mt-0">
-          © 2016 - 2024 FX Market Elite Pros, Inc. All rights reserved.
+          © 2016 - 2024 Elite Pro Markets, Inc. All rights reserved.
         </p>
       </div>
     </div>
