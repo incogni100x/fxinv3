@@ -4,7 +4,7 @@ import TransactionTable from "./components/table";
 
 export default async function TransactionsHistoryPage() {
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 py-20">
       <Suspense
         fallback={
           <DataTableSkeleton

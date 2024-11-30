@@ -73,6 +73,7 @@ export function ContactUs() {
                   <Label>Your Name</Label>
                   <FormControl>
                     <Input
+                      className="bg-muted"
                       disabled={isPending}
                       placeholder="Enter your full name"
                       {...field}
@@ -93,6 +94,7 @@ export function ContactUs() {
                   <Label>Your Email</Label>
                   <FormControl>
                     <Input
+                      className="bg-muted"
                       disabled={isPending}
                       placeholder="Enter your email address"
                       {...field}
@@ -114,7 +116,7 @@ export function ContactUs() {
                 <FormControl>
                   <Textarea
                     placeholder="How can we help you?"
-                    className="resize-none h-48 p-6"
+                    className="resize-none h-48 p-6 bg-muted-foreground"
                     {...field}
                     disabled={isPending}
                   />

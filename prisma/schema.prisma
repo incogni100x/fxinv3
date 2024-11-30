@@ -46,7 +46,7 @@ model Investment {
   planId     String
   planName   String
   plan       InvestmentPlan @relation("InvestmentPlan", fields: [planId], references: [id])
-  amount     Float?
+  balance    Float?         @default(0)
   status     String         @default("inactive") // "active", "inactive", "cancelled"
   approvedAt DateTime?
   createdAt  DateTime       @default(now())
