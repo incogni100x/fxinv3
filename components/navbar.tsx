@@ -89,7 +89,7 @@ export default function Navbar({ user }: { user: User | null }) {
                   {navigation.map((nav) => (
                     <Button
                       asChild
-                      variant={"ghost"}
+                      variant={nav.active ? "secondary" : "ghost"}
                       key={nav.name}
                       size={"lg"}
                       className=" text-start justify-start w-fit"

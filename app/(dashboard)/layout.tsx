@@ -40,7 +40,7 @@ export default async function DashboardLayout({
     redirect(nextStep); // Redirect to the next step
   }
   return (
-    <div className="flex h-screen w-full bg-gray-900 text-white rounded-md">
+    <div className="flex h-[100dvh] w-full bg-gray-900 text-white rounded-md">
       {/* Sidebar */}
       <SideBar user={user} />
 

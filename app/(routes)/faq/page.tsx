@@ -42,9 +42,9 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="relative py-18 sm:py-20 text-white ">
-      <div className="container mx-auto max-w-[900px] px-4">
-        <h1 className="text-3xl font-semibold sm:text-4xl text-center mb-8">
+    <div className="relative  text-white ">
+      <div className="container  mx-auto max-w-[900px] px-4 py-20">
+        <h1 className="text-3xl font-semibold sm:text-4xl text-center mb-8 ">
           Frequently Asked Questions
         </h1>
         <div className="space-y-6">

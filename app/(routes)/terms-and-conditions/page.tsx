@@ -1,8 +1,8 @@
 export default function TermsAndConditions() {
   return (
-    <div className=" min-h-screen py-12 px-6">
-      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-10">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">
+    <div className=" min-h-screen py-12 px-4">
+      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg px-4 py-12">
+        <h1 className="text-xl  lg:text-4xl font-bold text-gray-900 mb-6">
           Terms and Conditions
         </h1>
         <p className="text-gray-700 mb-8">
@@ -14,7 +14,7 @@ export default function TermsAndConditions() {
 
         {/* Eligibility Section */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+          <h2 className="text-xl lg:text-2xl font-semibold text-gray-800 mb-3">
             1. Eligibility
           </h2>
           <p className="text-gray-700">
@@ -32,7 +32,7 @@ export default function TermsAndConditions() {
 
         {/* User Responsibilities */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+          <h2 className="text-xl lg:text-2xl font-semibold text-gray-800 mb-3">
             2. User Responsibilities
           </h2>
           <p className="text-gray-700">Users are responsible for:</p>
@@ -47,7 +47,7 @@ export default function TermsAndConditions() {
 
         {/* Limitation of Liability */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+          <h2 className="text-xl lg:text-2xl font-semibold text-gray-800 mb-3">
             3. Limitation of Liability
           </h2>
           <p className="text-gray-700">Elite Pro Markets is not liable for:</p>
@@ -60,7 +60,7 @@ export default function TermsAndConditions() {
 
         {/* Termination */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+          <h2 className="text-xl lg:text-2xl font-semibold text-gray-800 mb-3">
             4. Termination of Services
           </h2>
           <p className="text-gray-700">
