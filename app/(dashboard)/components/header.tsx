@@ -70,7 +70,7 @@ export default function DashboardHeader({ user }: { user: User | null }) {
         <header className="flex h-14 lg:h-[60px] items-center justify-between gap-4 px-4">
           {/* Dynamic Route Name */}
           <div className="flex py-1 items-center gap-2">
-            <Link href="/" className="lg:hidden">
+            <Link href="/overview" className="lg:hidden">
               <Logo />
             </Link>
             <h2 className="text-lg font-semibold text-gray-50">

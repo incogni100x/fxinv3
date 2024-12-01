@@ -43,7 +43,11 @@ export const columns: ColumnDef<Transaction>[] = [
     cell: ({ row }) => (
       <div>
         {" "}
-        {row.original.amount ? <p>{row.original.amount}</p> : <p>-</p>}
+        {row.original.amount ? (
+          <p>{row.original.amount.toFixed(2)}</p>
+        ) : (
+          <p>-</p>
+        )}
       </div>
     ),
   },

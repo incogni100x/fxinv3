@@ -18,23 +18,29 @@ interface FetchTransactionsResponse {
   error?: string;
 }
 
-export const fetchTransactions =
-  async (): Promise<FetchTransactionsResponse> => {
-    try {
-      // Fetch the transactions from the database
-      const transactions = await prisma.transaction.findMany({
-        orderBy: { createdAt: "desc" }, // Order transactions by creation date
-      });
+export const fetchTransactions = async ({
+  userId,
+}: {
+  userId: string;
+}): Promise<FetchTransactionsResponse> => {
+  try {
+    // Fetch the transactions from the database
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        userId,
+      },
+      orderBy: { createdAt: "desc" }, // Order transactions by creation date
+    });
 
-      return { data: transactions };
-    } catch (error) {
-      // Handle any errors and return a meaningful message
-      return {
-        error:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      };
-    }
-  };
+    return { data: transactions };
+  } catch (error) {
+    // Handle any errors and return a meaningful message
+    return {
+      error:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    };
+  }
+};
 
 /**
  * Fetch dashboard metrics for a user

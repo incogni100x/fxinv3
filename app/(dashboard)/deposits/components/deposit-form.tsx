@@ -59,7 +59,7 @@ const wallets = [
     address: "0xfg95fig5iojigdoig59054",
   },
   {
-    name: "Usdt",
+    name: "USDT",
     address: "0xfg95fig5iojigdoig59054",
   },
 ];

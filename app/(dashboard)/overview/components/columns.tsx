@@ -17,7 +17,7 @@ export const columns: ColumnDef<Investment>[] = [
       <div>
         {" "}
         {row.original.planName && row.original.planName ? (
-          <p>{row.original.planId}</p>
+          <p>{row.original.planName}</p>
         ) : (
           <p>-</p>
         )}
