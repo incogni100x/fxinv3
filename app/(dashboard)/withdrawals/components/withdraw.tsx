@@ -54,7 +54,13 @@ export const withdrawalSchema = z
         address: z.string().min(1, "Wallet address is required."),
       })
       .optional(),
-    amount: z.string().min(1, "Amount is required."),
+    amount: z
+      .string()
+      .nonempty("Amount is required")
+      .transform((value) => parseFloat(value))
+      .refine((value) => !isNaN(value) && value > 0, {
+        message: "Amount must be a positive number",
+      }),
   })
   .refine(
     (data) => {
@@ -130,7 +136,7 @@ export default function WithdrawalForm() {
                       // Reset form fields based on the selected payment method
                       form.reset({
                         paymentMethod: value,
-                        amount: "",
+                        amount: undefined,
                         bankDetails: value === "bank" ? {} : undefined,
                         cryptoDetails: value === "crypto" ? {} : undefined,
                       });

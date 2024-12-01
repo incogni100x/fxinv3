@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "./logo";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -63,12 +64,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="mailto:support@fxmarketelitepros.net"
+                <Link
+                  href="/contact-us"
                   className="text-md leading-6 text-gray-300 hover:text-white"
                 >
                   Send us an email
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

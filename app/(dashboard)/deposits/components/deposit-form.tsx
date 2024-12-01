@@ -77,7 +77,6 @@ export default function DepositForm() {
     defaultValues: {
       method: "",
       currency: "",
-      amount: 0,
     },
   });
 
@@ -286,6 +285,19 @@ export default function DepositForm() {
                   how to complete your payment via bank transfer.
                 </DialogDescription>
               </DialogHeader>
+              <DialogFooter>
+                <Button
+                  className="w-full"
+                  size={"lg"}
+                  onClick={() => {
+                    setDialogOpen(false);
+                    form.reset();
+                    router.push("/transactions-history");
+                  }}
+                >
+                  Done
+                </Button>
+              </DialogFooter>
             </div>
           )}
         </DialogContent>
