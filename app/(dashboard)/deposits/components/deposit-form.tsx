@@ -245,16 +245,15 @@ export default function DepositForm() {
                   Wallet Address for {selectedCrypto.name}
                 </DialogTitle>
               </DialogHeader>
-              <div className="flex items-center justify-between gap-2 bg-muted rounded-md p-2">
-                <p>{selectedCrypto.address}</p>
-                <Button
-                  onClick={() => {
-                    navigator.clipboard.writeText(selectedCrypto.address);
-                    toast.success("Address copied to clipboard!");
-                  }}
-                >
-                  Copy
-                </Button>
+              <div
+                className="flex flex-col gap-2 bg-muted rounded-md p-4 cursor-pointer"
+                onClick={() => {
+                  navigator.clipboard.writeText(selectedCrypto.address);
+                  toast.success("Address copied to clipboard!");
+                }}
+                title="Click to copy address"
+              >
+                <p className="break-words text-sm">{selectedCrypto.address}</p>
               </div>
               <div className="flex items-center justify-center">
                 <QRCodeSVG
@@ -263,11 +262,13 @@ export default function DepositForm() {
                       ? `bitcoin:${selectedCrypto.address}`
                       : selectedCrypto.name === "Ethereum"
                       ? `ethereum:${selectedCrypto.address}`
-                      : selectedCrypto.address // Use raw address for USDT or other tokens
+                      : selectedCrypto.name === "USDT"
+                      ? `trx:${selectedCrypto.address}` // Use TRX scheme for TRC20 tokens
+                      : selectedCrypto.address // Fallback to raw address
                   }
                   size={150}
                   level="H" // High error correction for better scanning
-                  includeMargin // Add margins around the QR code
+                  includeMargin // Add margin for better QR code readability
                 />
               </div>
 
