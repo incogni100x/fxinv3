@@ -46,7 +46,7 @@ export const plans = [
     price: 100000,
     frequency: "month",
     features: [{ text: "24/7 Support" }, { text: "Professional Charts" }],
-    weeklyEarnings: "20%",
+    weeklyEarnings: "25%",
     roi: "750,000",
     iconColor: "text-blue-400",
     color: "bg-blue-100 border-blue-400",
