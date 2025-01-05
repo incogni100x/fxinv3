@@ -1,4 +1,3 @@
-import { phoneSchema } from "@/components/phone-input-2";
 import * as z from "zod";
 
 export const SignUpSchema = z
