@@ -51,7 +51,7 @@ export const DepositSchema = z.object({
 
 const wallets = [
   {
-    name: "Bitcoin",
+    name: "BITCOIN",
     address: "bc1qhzvfkacadyeur77wes5v3hutrn54vfrhx6hgy0",
   },
   {

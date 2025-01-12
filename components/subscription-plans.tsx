@@ -11,7 +11,7 @@ export const plans = [
     price: 1000,
     frequency: "month",
     features: [{ text: "24/7 Support" }, { text: "Professional Charts" }],
-    weeklyEarnings: "10%",
+    weeklyEarnings: "10",
     roi: "1,750",
     iconColor: "text-orange-400",
     color: "bg-orange-100 border-orange-400",
@@ -23,7 +23,7 @@ export const plans = [
     price: 20000,
     frequency: "month",
     features: [{ text: "24/7 Support" }, { text: "Professional Charts" }],
-    weeklyEarnings: "15%",
+    weeklyEarnings: "15",
     roi: "117,500",
     iconColor: "text-gray-400",
     color: "bg-gray-100 border-gray-400",
@@ -35,7 +35,7 @@ export const plans = [
     price: 50000,
     frequency: "month",
     features: [{ text: "24/7 Support" }, { text: "Professional Charts" }],
-    weeklyEarnings: "20%",
+    weeklyEarnings: "20",
     roi: "350,000",
     iconColor: "text-yellow-400",
     color: "bg-yellow-100 border-yellow-400",
@@ -46,7 +46,7 @@ export const plans = [
     price: 100000,
     frequency: "month",
     features: [{ text: "24/7 Support" }, { text: "Professional Charts" }],
-    weeklyEarnings: "25%",
+    weeklyEarnings: "25",
     roi: "750,000",
     iconColor: "text-blue-400",
     color: "bg-blue-100 border-blue-400",
@@ -67,6 +67,11 @@ export default async function SubscriptionPlans() {
       id: dbPlan?.id || staticPlan.name, // Use ID from DB or fallback to name
       interestRate: dbPlan?.interestRate || null,
       durationDays: dbPlan?.durationDays || "N/A",
+      price: dbPlan?.minAmount || staticPlan.price,
+      minAmount: dbPlan?.minAmount || staticPlan.price,
+      name: dbPlan?.name || staticPlan.name,
+      weeklyEarnings: dbPlan?.interestRate || staticPlan.weeklyEarnings,
+      roi: dbPlan?.interestRate || staticPlan.roi,
     };
   });
 
@@ -132,7 +137,7 @@ export default async function SubscriptionPlans() {
                     <span>
                       Weekly Earnings:{" "}
                       <span className="font-semibold text-green-500">
-                        {plan.weeklyEarnings}
+                        {plan.weeklyEarnings}%
                       </span>
                     </span>
                   </li>

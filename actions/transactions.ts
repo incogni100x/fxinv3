@@ -24,32 +24,34 @@ export const Deposit = async (values: z.infer<typeof DepositSchema>) => {
     return { error: "Unauthorized" };
   }
 
-  // // Retrieve the user investment and plan in a single query using `include`
-  // const userInvestmentWithPlan = await prisma.investment.findFirst({
-  //   where: {
-  //     userId: user.id,
-  //   },
-  //   include: {
-  //     plan: true, // Include related investment plan
-  //   },
-  // });
+  // Retrieve the user investment and plan in a single query using `include`
+  const userInvestmentWithPlan = await prisma.investment.findFirst({
+    where: {
+      userId: user.id,
+    },
+    include: {
+      plan: true, // Include related investment plan
+    },
+  });
 
   // // Check if user has an active investment
   // if (!userInvestmentWithPlan) {
   //   return { error: "You need to have an active investment to make a deposit" };
   // }
+  const investment = userInvestmentWithPlan?.plan;
 
-  // const { plan: investment } = userInvestmentWithPlan;
-
-  // // Check if investment plan exists and validate minimum deposit
-  // if (!investment) {
-  //   return { error: "Investment Plan not found" };
-  // }
-  // if (investment.minAmount > Number(values.amount)) {
-  //   return {
-  //     error: `You need to send a minimum deposit of ${investment.minAmount} for your ${investment.name} plan`,
-  //   };
-  // }
+  // Check if investment plan exists and validate minimum deposit
+  if (!investment) {
+    return { error: "Investment Plan not found" };
+  }
+  if (
+    investment.minAmount > Number(values.amount)
+    // userInvestmentWithPlan?.status === "inactive"
+  ) {
+    return {
+      error: `You need to send a minimum deposit of ${investment.minAmount} for your ${investment.name} plan`,
+    };
+  }
 
   // Create the transaction
   const transaction = await prisma.transaction.create({
