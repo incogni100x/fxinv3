@@ -22,12 +22,13 @@ import FormButton from "@/components/ui/form-button";
 import { FormWrapper } from "./form-wrapper";
 import { newPassword } from "@/actions/auth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function NewPasswordForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [showPassword, setShowPassword] = useState(false);
-
+  const router = useRouter();
   const form = useForm<z.infer<typeof NewPasswordSchema>>({
     resolver: zodResolver(NewPasswordSchema),
     defaultValues: {
@@ -44,6 +45,7 @@ export default function NewPasswordForm() {
             setError(data.error);
           } else {
             toast.success(data.success);
+            router.push("/overview");
           }
         })
         .catch(() => setError("Oops! Something went wrong!"));

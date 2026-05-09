@@ -19,7 +19,7 @@ export default function Verification() {
           <h1 className="text-4xl font-bold">{errorCode}</h1>
           <h2 className="text-2xl lg:text-3xl">{error}</h2>
           <p>{errorDescription}</p>
-          <Button size="lg" asChild>
+          <Button size="lg" asChild> 
             <Link href="/">Go home</Link>
           </Button>
         </div>

@@ -7,7 +7,7 @@ export default function TermsAndConditions() {
         </h1>
         <p className="text-gray-700 mb-8">
           These Terms and Conditions govern the use of{" "}
-          <span className="font-semibold">Elite Pro Markets</span>
+          <span className="font-semibold">Ever Green Pro Trades</span>
           and its trading services. By accessing our platform, you agree to
           these terms. Please read them carefully.
         </p>
@@ -50,7 +50,9 @@ export default function TermsAndConditions() {
           <h2 className="text-xl lg:text-2xl font-semibold text-gray-800 mb-3">
             3. Limitation of Liability
           </h2>
-          <p className="text-gray-700">Elite Pro Markets is not liable for:</p>
+          <p className="text-gray-700">
+            Ever Green Pro Trades is not liable for:
+          </p>
           <ul className="list-disc pl-5 text-gray-700">
             <li>Losses arising from market fluctuations.</li>
             <li>Unauthorized account access due to user negligence.</li>
@@ -77,10 +79,10 @@ export default function TermsAndConditions() {
         <p className="text-gray-700">
           For any inquiries about these Terms, please reach us at{" "}
           <a
-            href="mailto:support@elitepromarkets.com"
+            href={`mailto:support@${process.env.RESEND_DOMAIN}`}
             className="text-indigo-600 underline"
           >
-            support@elitepromarkets.com
+            support@{process.env.RESEND_DOMAIN}
           </a>
           .
         </p>

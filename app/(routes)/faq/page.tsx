@@ -4,12 +4,12 @@ import React, { useState } from "react";
 export default function FAQPage() {
   const faqs = [
     {
-      question: "What services does Elite Pro Markets provide?",
+      question: "What services does Ever Green Pro Trades provide?",
       answer:
-        "Elite Pro Markets offers a range of trading services, including forex, cryptocurrencies, commodities, indices, stocks, and other securities. We aim to provide premier trading opportunities that help our clients achieve their financial goals.",
+        "Ever Green Pro Trades offers a range of trading services, including forex, cryptocurrencies, commodities, indices, stocks, and other securities. We aim to provide premier trading opportunities that help our clients achieve their financial goals.",
     },
     {
-      question: "How can I start trading with Elite Pro Markets?",
+      question: "How can I start trading with Ever Green Pro Trades?",
       answer:
         "You can start trading with us by visiting our website and creating an account. Our platform allows you to manage your trades online, including access to advanced tools for analysis and decision-making.",
     },

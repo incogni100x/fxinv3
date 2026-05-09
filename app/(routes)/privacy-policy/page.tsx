@@ -6,9 +6,9 @@ export default function PrivacyPolicy() {
           Privacy Policy
         </h1>
         <p className="text-gray-700 mb-8">
-          At <span className="font-semibold">Elite Pro Markets</span>, we are
-          committed to protecting your privacy. This Privacy Policy outlines the
-          information we collect, how we use it, and the measures we take to
+          At <span className="font-semibold">Ever Green Pro Trades</span>, we
+          are committed to protecting your privacy. This Privacy Policy outlines
+          the information we collect, how we use it, and the measures we take to
           keep it secure.
         </p>
 
@@ -83,10 +83,10 @@ export default function PrivacyPolicy() {
         <p className="text-gray-700">
           For questions about our Privacy Policy, please contact us at{" "}
           <a
-            href="mailto:support@elitepromarkets.com"
+            href={`mailto:support@${process.env.RESEND_DOMAIN}`}
             className="text-indigo-600 underline"
           >
-            support@elitepromarkets.com
+            support@{process.env.RESEND_DOMAIN}
           </a>
           .
         </p>

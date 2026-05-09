@@ -51,14 +51,14 @@ export default function AboutUsPage() {
             {/* Text Content */}
             <div className="max-w-4xl text-[18px] leading-7 text-white lg:col-span-7">
               <p>
-                Welcome to Elite Pro Markets, a leading platform dedicated to
-                delivering a seamless trading experience. We provide 24/7 access
-                to an extensive range of trading products, including forex,
-                cryptocurrencies, commodities, indices, and stocks.
+                Welcome to Ever Green Pro Trades, a leading platform dedicated
+                to delivering a seamless trading experience. We provide 24/7
+                access to an extensive range of trading products, including
+                forex, cryptocurrencies, commodities, indices, and stocks.
               </p>
               <p className="mt-8">
-                At Elite Pro Markets, we leverage advanced technology to ensure
-                high liquidity, low spreads, mobile trading, and robust
+                At Ever Green Pro Trades, we leverage advanced technology to
+                ensure high liquidity, low spreads, mobile trading, and robust
                 technical analysis. Our platform is designed to cater to both
                 novice and professional traders.
               </p>
@@ -84,9 +84,9 @@ export default function AboutUsPage() {
               Why Choose Us
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              At Elite Pro Markets, we are committed to excellence and client
-              satisfaction. Our team of experts works tirelessly to provide a
-              superior trading experience.
+              At Ever Green Pro Trades, we are committed to excellence and
+              client satisfaction. Our team of experts works tirelessly to
+              provide a superior trading experience.
             </p>
           </div>
           <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -104,8 +104,9 @@ export default function AboutUsPage() {
                 Licensed and Trusted
               </dt>
               <dd className="mt-1 text-gray-600">
-                Elite Pro Markets operates under strict regulatory standards,
-                ensuring transparency and trust in all our operations.
+                Ever Green Pro Trades operates under strict regulatory
+                standards, ensuring transparency and trust in all our
+                operations.
               </dd>
             </div>
             <div>

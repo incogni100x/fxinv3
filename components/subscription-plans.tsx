@@ -8,11 +8,11 @@ export const plans = [
     name: "bronze",
     description:
       "Ideal for individuals seeking a low-risk entry point with steady returns.",
-    price: 1000,
+    price: 100,
     frequency: "month",
     features: [{ text: "24/7 Support" }, { text: "Professional Charts" }],
     weeklyEarnings: "10",
-    roi: "1,750",
+    roi: "50,000",
     iconColor: "text-orange-400",
     color: "bg-orange-100 border-orange-400",
   },
@@ -20,7 +20,7 @@ export const plans = [
     name: "silver",
     description:
       "Perfect for scaling investments with higher returns and premium features.",
-    price: 20000,
+    price: 10000,
     frequency: "month",
     features: [{ text: "24/7 Support" }, { text: "Professional Charts" }],
     weeklyEarnings: "15",

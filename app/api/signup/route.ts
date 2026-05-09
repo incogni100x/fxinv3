@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   if (res.data.properties?.email_otp) {
     // resend email
     const resendRes = await resend.emails.send({
-      from: `Elite Pro Markets <support@${process.env.RESEND_DOMAIN}>`,
+      from: `Ever Green Pro Trades <support@${process.env.RESEND_DOMAIN}>`,
       to: [data.email],
       subject: "Verify Email",
       react: SupaAuthVerifyEmail({
