@@ -64,6 +64,9 @@ const wallets = [
   },
 ];
 
+const dashboardFieldClass =
+  "border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary";
+
 export default function DepositForm() {
   const [isPending, startTransition] = useTransition();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -149,7 +152,7 @@ export default function DepositForm() {
                     }}
                     disabled={isPending}
                   >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className={`w-full ${dashboardFieldClass}`}>
                       <SelectValue placeholder="Select method" />
                     </SelectTrigger>
                     <SelectContent>
@@ -169,7 +172,7 @@ export default function DepositForm() {
                   <FormItem>
                     <Label>Select cryptocurrency</Label>
                     <Select disabled={isPending} onValueChange={field.onChange}>
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className={`w-full ${dashboardFieldClass}`}>
                         <SelectValue placeholder="Select cryptocurrency" />
                       </SelectTrigger>
                       <SelectContent>
@@ -193,7 +196,7 @@ export default function DepositForm() {
                   <FormItem>
                     <Label>Select currency</Label>
                     <Select disabled={isPending} onValueChange={field.onChange}>
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className={`w-full ${dashboardFieldClass}`}>
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
                       <SelectContent>
@@ -217,7 +220,7 @@ export default function DepositForm() {
                     <Input
                       type="number"
                       placeholder="$0.000000"
-                      className="bg-muted"
+                      className={dashboardFieldClass}
                       {...field}
                       disabled={isPending}
                     />

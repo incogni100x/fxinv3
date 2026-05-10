@@ -84,6 +84,9 @@ const wallets = [
   { name: "Usdt", address: "0xfg95fig5iojigdoig59054" },
 ];
 
+const dashboardFieldClass =
+  "border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary";
+
 export default function WithdrawalForm() {
   const [isPending, startTransition] = useTransition();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -143,7 +146,7 @@ export default function WithdrawalForm() {
                     }}
                     disabled={isPending}
                   >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className={`w-full ${dashboardFieldClass}`}>
                       <SelectValue placeholder="Select method" />
                     </SelectTrigger>
                     <SelectContent>
@@ -167,7 +170,7 @@ export default function WithdrawalForm() {
                         disabled={isPending}
                         onValueChange={field.onChange}
                       >
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className={`w-full ${dashboardFieldClass}`}>
                           <SelectValue placeholder="Select cryptocurrency" />
                         </SelectTrigger>
                         <SelectContent>
@@ -190,7 +193,7 @@ export default function WithdrawalForm() {
                       <Label>Address</Label>
                       <FormControl>
                         <Input
-                          className="bg-muted"
+                          className={dashboardFieldClass}
                           placeholder="Enter wallet address"
                           {...field}
                           disabled={isPending}
@@ -215,7 +218,7 @@ export default function WithdrawalForm() {
                           disabled={isPending}
                           onValueChange={field.onChange}
                         >
-                          <SelectTrigger className="w-full">
+                          <SelectTrigger className={`w-full ${dashboardFieldClass}`}>
                             <SelectValue placeholder="Select type" />
                           </SelectTrigger>
                           <SelectContent>
@@ -236,7 +239,7 @@ export default function WithdrawalForm() {
                       <Label>Account Name</Label>
                       <FormControl>
                         <Input
-                          className="bg-muted"
+                          className={dashboardFieldClass}
                           placeholder="Enter account name"
                           {...field}
                           disabled={isPending}
@@ -254,7 +257,7 @@ export default function WithdrawalForm() {
                       <Label>Account Number</Label>
                       <FormControl>
                         <Input
-                          className="bg-muted"
+                          className={dashboardFieldClass}
                           type="number"
                           placeholder="Enter account number"
                           {...field}
@@ -273,7 +276,7 @@ export default function WithdrawalForm() {
                       <Label>Bank Name</Label>
                       <FormControl>
                         <Input
-                          className="bg-muted"
+                          className={dashboardFieldClass}
                           placeholder="Enter bank name"
                           {...field}
                           disabled={isPending}
@@ -291,7 +294,7 @@ export default function WithdrawalForm() {
                       <Label>Routing number</Label>
                       <FormControl>
                         <Input
-                          className="bg-muted"
+                          className={dashboardFieldClass}
                           placeholder="Enter routing number"
                           type="number"
                           {...field}
@@ -312,7 +315,7 @@ export default function WithdrawalForm() {
                   <Label>Withdrawal Amount</Label>
                   <FormControl>
                     <Input
-                      className="bg-muted"
+                      className={dashboardFieldClass}
                       type="number"
                       placeholder="Enter amount"
                       {...field}
