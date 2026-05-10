@@ -85,40 +85,60 @@ export default function InvestmentPlansForm({
                     disabled={isPending}
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
                   >
-                    {mergedPlans.map((plan) => (
-                      <label
-                        key={plan.name}
-                        className={`relative flex flex-col items-start justify-between border rounded-md p-6 cursor-pointer transition-colors ${
-                          field.value === plan.id
-                            ? `${plan.color} border-2`
-                            : "border-blue-200 bg-blue-50/70"
-                        }`}
-                      >
-                        {field.value === plan.id && (
-                          <TickCircle
-                            variant="Bold"
-                            size="24"
-                            className={`absolute top-2 right-2 ${plan.iconColor}`}
-                          />
-                        )}
-                        <div className="flex flex-col space-y-2">
-                          <FormLabel className="font-bold text-lg capitalize">
-                            {plan.name}
-                          </FormLabel>
+                    {mergedPlans.map((plan) => {
+                      const isSelected = field.value === plan.id;
 
-                          <p className="text-sm font-medium text-blue-900">
-                            Price: ${plan.price.toLocaleString()}
-                          </p>
-                          <p className="text-sm font-medium text-blue-900">
-                            Weekly Earnings: {plan.weeklyEarnings}
-                          </p>
-                          <p className="text-sm font-medium text-blue-900">
-                            ROI: ${plan.roi.toLocaleString()}
-                          </p>
-                        </div>
-                        <RadioGroupItem value={plan.id} className="hidden" />
-                      </label>
-                    ))}
+                      return (
+                        <label
+                          key={plan.name}
+                          className={`relative flex cursor-pointer flex-col items-start justify-between rounded-md border p-6 transition-colors ${
+                            isSelected
+                              ? `${plan.color} border-2`
+                              : "border-gray-700 bg-[#111827]"
+                          }`}
+                        >
+                          {isSelected && (
+                            <TickCircle
+                              variant="Bold"
+                              size="24"
+                              className={`absolute top-2 right-2 ${plan.iconColor}`}
+                            />
+                          )}
+                          <div className="flex flex-col space-y-2">
+                            <FormLabel
+                              className={`text-lg font-bold capitalize ${
+                                isSelected ? "text-gray-950" : "text-white"
+                              }`}
+                            >
+                              {plan.name}
+                            </FormLabel>
+
+                            <p
+                              className={`text-sm font-medium ${
+                                isSelected ? "text-gray-800" : "text-gray-300"
+                              }`}
+                            >
+                              Price: ${plan.price.toLocaleString()}
+                            </p>
+                            <p
+                              className={`text-sm font-medium ${
+                                isSelected ? "text-gray-800" : "text-gray-300"
+                              }`}
+                            >
+                              Weekly Earnings: {plan.weeklyEarnings}
+                            </p>
+                            <p
+                              className={`text-sm font-medium ${
+                                isSelected ? "text-gray-800" : "text-gray-300"
+                              }`}
+                            >
+                              ROI: ${plan.roi.toLocaleString()}
+                            </p>
+                          </div>
+                          <RadioGroupItem value={plan.id} className="hidden" />
+                        </label>
+                      );
+                    })}
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />

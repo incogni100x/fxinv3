@@ -110,7 +110,7 @@ export default function RegisterForm() {
                     <Label>First Name</Label>
                     <FormControl>
                       <Input
-                        className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                        className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                         {...field}
                         disabled={isPending}
                         placeholder="Enter first name"
@@ -129,7 +129,7 @@ export default function RegisterForm() {
                     <Label>Last Name</Label>
                     <FormControl>
                       <Input
-                        className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                        className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                         {...field}
                         disabled={isPending}
                         placeholder="Enter last name"
@@ -148,7 +148,7 @@ export default function RegisterForm() {
                     <Label>Email</Label>
                     <FormControl>
                       <Input
-                        className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                        className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                         {...field}
                         disabled={isPending}
                         placeholder="Enter your email address"
@@ -169,7 +169,7 @@ export default function RegisterForm() {
                     <FormControl>
                       <div className="relative">
                         <Input
-                          className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                          className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                           autoComplete="new-password"
                           {...field}
                           disabled={isPending}
@@ -208,7 +208,7 @@ export default function RegisterForm() {
                     <FormControl>
                       <div className="relative">
                         <Input
-                          className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                          className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                           autoComplete="new-password"
                           {...field}
                           disabled={isPending}
@@ -247,9 +247,9 @@ export default function RegisterForm() {
               title="Create an account"
             />
 
-            <div className="flex justify-center items-center text-blue-950 tracking-tight">
+            <div className="flex justify-center items-center text-gray-100 tracking-tight">
               Already have an account?
-              <Link className="p-0 font-normal text-blue-700" href="/login">
+              <Link className="p-0 font-normal text-primary" href="/login">
                 Login
               </Link>
             </div>
@@ -259,7 +259,7 @@ export default function RegisterForm() {
 
       <Dialog open={isOtpDialogOpen} onOpenChange={setOtpDialogOpen}>
         <DialogContent
-          className="border-blue-200 bg-blue-100 text-blue-950 sm:max-w-[425px]"
+          className="border-gray-700 bg-[#1F2937] text-gray-100 sm:max-w-[425px]"
           onInteractOutside={(e) => e.preventDefault()}
         >
           <DialogHeader>

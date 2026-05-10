@@ -67,7 +67,7 @@ export default function LoginForm() {
                   <Label>Email</Label>
                   <FormControl>
                     <Input
-                      className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                      className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="Enter email address"
@@ -80,7 +80,7 @@ export default function LoginForm() {
             />
             <div className="flex justify-end items-center  tracking-tight">
               <Link
-                className=" font-normal text-blue-700"
+                className=" font-normal text-primary"
                 href="/forgot-password"
               >
                 Forgot password?
@@ -95,7 +95,7 @@ export default function LoginForm() {
                   <FormControl>
                     <div className="relative">
                       <Input
-                        className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                        className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                         autoComplete="new-password"
                         {...field}
                         disabled={isPending}
@@ -134,9 +134,9 @@ export default function LoginForm() {
             title="Login"
           />
 
-          <div className="flex justify-center items-center text-blue-950 tracking-tight">
+          <div className="flex justify-center items-center text-gray-100 tracking-tight">
             Don&apos;t have an account?
-            <Link className="p-0 font-normal text-blue-700" href="/register">
+            <Link className="p-0 font-normal text-primary" href="/register">
               Register
             </Link>
           </div>

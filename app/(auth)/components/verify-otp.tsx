@@ -179,7 +179,7 @@ export default function VerifyOtpForm({
           {isPending ? <Spinner width={24} height={24} /> : "Verify OTP"}
         </Button>
 
-        <div className="flex justify-center items-center text-blue-900/70 tracking-tight">
+        <div className="flex justify-center items-center text-gray-400 tracking-tight">
           {countdownTime > 0 && (
             <span>Resend in {formatTime(countdownTime)}</span>
           )}

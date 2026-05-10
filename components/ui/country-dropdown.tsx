@@ -97,7 +97,7 @@ const CountryDropdownComponent = (
   );
 
   const triggerClasses = cn(
-    "flex w-full items-center justify-between whitespace-nowrap rounded-md border border-blue-200 bg-blue-50 px-3 py-3 text-blue-950 ring-offset-background placeholder:text-blue-700/45 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+    "flex w-full items-center justify-between whitespace-nowrap rounded-md border border-gray-700 bg-[#111827] px-3 py-3 text-white ring-offset-background placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
     slim === true && "w-20"
   );
 

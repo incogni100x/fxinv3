@@ -87,7 +87,7 @@ export default function AddressForm() {
                   <Label>Address</Label>
                   <FormControl>
                     <Input
-                      className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                      className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="Enter address"
@@ -107,7 +107,7 @@ export default function AddressForm() {
                   <Label>State</Label>
                   <FormControl>
                     <Input
-                      className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                      className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="Enter state"
@@ -126,7 +126,7 @@ export default function AddressForm() {
                   <Label>City</Label>
                   <FormControl>
                     <Input
-                      className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                      className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="Enter city"
@@ -145,7 +145,7 @@ export default function AddressForm() {
                   <Label>Postal Code</Label>
                   <FormControl>
                     <Input
-                      className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                      className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="Enter Postal Code"

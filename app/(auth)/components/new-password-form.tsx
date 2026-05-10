@@ -68,7 +68,7 @@ export default function NewPasswordForm() {
                   <FormControl>
                     <div className="relative">
                       <Input
-                        className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                        className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                         autoComplete="new-password"
                         {...field}
                         disabled={isPending}
@@ -107,7 +107,7 @@ export default function NewPasswordForm() {
                   <FormControl>
                     <div className="relative">
                       <Input
-                        className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
+                        className="border-gray-700 bg-[#111827] text-white placeholder:text-gray-500 focus-visible:ring-primary"
                         autoComplete="new-password"
                         {...field}
                         disabled={isPending}
