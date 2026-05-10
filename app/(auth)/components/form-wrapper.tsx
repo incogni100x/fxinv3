@@ -28,7 +28,7 @@ export const FormWrapper = ({
   return (
     <Card
       className={cn(
-        "w-full rounded-lg border-gray-700 bg-[#1F2937] py-10 text-gray-100 shadow-xl shadow-black/20 [&_label]:text-gray-100",
+        "w-full rounded-lg border-gray-700 bg-[#1F2937] py-10 text-gray-100 shadow-xl shadow-black/20",
         className
       )}
     >

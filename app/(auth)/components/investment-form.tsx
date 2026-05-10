@@ -127,13 +127,6 @@ export default function InvestmentPlansForm({
                             >
                               Weekly Earnings: {plan.weeklyEarnings}
                             </p>
-                            <p
-                              className={`text-sm font-medium ${
-                                isSelected ? "text-gray-800" : "text-gray-300"
-                              }`}
-                            >
-                              ROI: ${plan.roi.toLocaleString()}
-                            </p>
                           </div>
                           <RadioGroupItem value={plan.id} className="hidden" />
                         </label>

@@ -200,9 +200,9 @@ export function FileUploader(props: FileUploaderProps) {
           <div
             {...getRootProps()}
             className={cn(
-              "group relative grid h-52 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-5 py-2.5 text-center transition hover:bg-muted/25",
-              "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-              isDragActive && "border-muted-foreground/50",
+              "group relative grid h-52 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-gray-600 px-5 py-2.5 text-center text-gray-100 transition hover:bg-gray-800/70",
+              "ring-offset-[#1F2937] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+              isDragActive && "border-primary",
               isDisabled && "pointer-events-none opacity-60",
               className
             )}
@@ -213,11 +213,11 @@ export function FileUploader(props: FileUploaderProps) {
               <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
                 <div className="rounded-full border border-dashed p-3">
                   <Upload
-                    className="size-7 text-muted-foreground"
+                    className="size-7 text-gray-300"
                     aria-hidden="true"
                   />
                 </div>
-                <p className="font-medium text-muted-foreground">
+                <p className="font-medium text-gray-100">
                   Drop the files here
                 </p>
               </div>
@@ -225,15 +225,15 @@ export function FileUploader(props: FileUploaderProps) {
               <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
                 <div className="rounded-full border border-dashed p-3">
                   <Upload
-                    className="size-7 text-muted-foreground"
+                    className="size-7 text-gray-300"
                     aria-hidden="true"
                   />
                 </div>
                 <div className="flex flex-col gap-px">
-                  <p className="font-medium text-muted-foreground">
+                  <p className="font-medium text-gray-100">
                     Drag {`'n'`} drop files here, or click to select files
                   </p>
-                  <p className="text-sm text-muted-foreground/70">
+                  <p className="text-sm text-gray-300">
                     You can upload
                     {maxFileCount > 1
                       ? ` ${
@@ -279,10 +279,10 @@ function FileCard({ file, progress, onRemove }: FileCardProps) {
         {isFileWithPreview(file) ? <FilePreview file={file} /> : null}
         <div className="flex w-full flex-col gap-2">
           <div className="flex flex-col gap-px">
-            <p className="line-clamp-1 text-sm font-medium text-foreground/80">
+            <p className="line-clamp-1 text-sm font-medium text-gray-100">
               {file.name}
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-gray-400">
               {formatBytes(file.size)}
             </p>
           </div>
@@ -327,7 +327,5 @@ function FilePreview({ file }: FilePreviewProps) {
     );
   }
 
-  return (
-    <FileText className="size-10 text-muted-foreground" aria-hidden="true" />
-  );
+  return <FileText className="size-10 text-gray-300" aria-hidden="true" />;
 }
