@@ -51,13 +51,13 @@ export default function AboutUsPage() {
             {/* Text Content */}
             <div className="max-w-4xl text-[18px] leading-7 text-white lg:col-span-7">
               <p>
-                Welcome to Ever Green Pro Trades, a leading platform dedicated
+                Welcome to Pro Elite Holdings, a leading platform dedicated
                 to delivering a seamless trading experience. We provide 24/7
                 access to an extensive range of trading products, including
                 forex, cryptocurrencies, commodities, indices, and stocks.
               </p>
               <p className="mt-8">
-                At Ever Green Pro Trades, we leverage advanced technology to
+                At Pro Elite Holdings, we leverage advanced technology to
                 ensure high liquidity, low spreads, mobile trading, and robust
                 technical analysis. Our platform is designed to cater to both
                 novice and professional traders.
@@ -84,7 +84,7 @@ export default function AboutUsPage() {
               Why Choose Us
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              At Ever Green Pro Trades, we are committed to excellence and
+              At Pro Elite Holdings, we are committed to excellence and
               client satisfaction. Our team of experts works tirelessly to
               provide a superior trading experience.
             </p>
@@ -104,7 +104,7 @@ export default function AboutUsPage() {
                 Licensed and Trusted
               </dt>
               <dd className="mt-1 text-gray-600">
-                Ever Green Pro Trades operates under strict regulatory
+                Pro Elite Holdings operates under strict regulatory
                 standards, ensuring transparency and trust in all our
                 operations.
               </dd>

@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
           Privacy Policy
         </h1>
         <p className="text-gray-700 mb-8">
-          At <span className="font-semibold">Ever Green Pro Trades</span>, we
+          At <span className="font-semibold">Pro Elite Holdings</span>, we
           are committed to protecting your privacy. This Privacy Policy outlines
           the information we collect, how we use it, and the measures we take to
           keep it secure.

@@ -111,7 +111,7 @@ export default function Footer() {
       {/* Footer Bottom Section */}
       <div className="border-white/10 md:flex md:items-center md:justify-between mt-[64px]">
         <p className="text-md leading-5 text-[#AEAFB2] md:order-1 md:mt-0">
-          © 2016 - 2024 Ever Green Pro Trades, Inc. All rights reserved.
+          © 2016 - 2024 Pro Elite Holdings, Inc. All rights reserved.
         </p>
       </div>
     </div>

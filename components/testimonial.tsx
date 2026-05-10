@@ -8,27 +8,27 @@ const testimonials = [
   {
     name: "James W.",
     role: "Professional Forex Trader",
-    text: "Ever Green Pro Trades has revolutionized the way I trade. The platform's real-time analytics and smooth execution of trades have significantly boosted my profits.",
+    text: "Pro Elite Holdings has revolutionized the way I trade. The platform's real-time analytics and smooth execution of trades have significantly boosted my profits.",
   },
   {
     name: "Sophia K.",
     role: "Financial Analyst",
-    text: "I’ve tried many platforms, but none come close to the user-friendly design and powerful tools of Ever Green Pro Trades. The customizable dashboard is a game-changer for managing multiple assets.",
+    text: "I’ve tried many platforms, but none come close to the user-friendly design and powerful tools of Pro Elite Holdings. The customizable dashboard is a game-changer for managing multiple assets.",
   },
   {
     name: "Carlos M.",
     role: "Investment Banker",
-    text: "As a professional, I need a platform that offers both security and innovation. Ever Green Pro Trades provides top-notch security features and seamless mobile trading. It's the best I’ve used so far.",
+    text: "As a professional, I need a platform that offers both security and innovation. Pro Elite Holdings provides top-notch security features and seamless mobile trading. It's the best I’ve used so far.",
   },
   {
     name: "Linda R.",
     role: "Crypto Investor",
-    text: "Ever Green Pro Trades is the only platform that integrates all my crypto holdings in one place. The multi-currency support makes it incredibly convenient to manage both traditional and digital assets.",
+    text: "Pro Elite Holdings is the only platform that integrates all my crypto holdings in one place. The multi-currency support makes it incredibly convenient to manage both traditional and digital assets.",
   },
   {
     name: "David T.",
     role: "Small Business Owner",
-    text: "Managing business finances has always been a hassle, but with Ever Green Pro Trades, everything from tracking to financial analysis is made simple and efficient. It's the perfect tool for modern businesses.",
+    text: "Managing business finances has always been a hassle, but with Pro Elite Holdings, everything from tracking to financial analysis is made simple and efficient. It's the perfect tool for modern businesses.",
   },
 ];
 
@@ -47,7 +47,7 @@ const TestimonialSection = () => {
               Built for today’s ambitious earners
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Thousands of forward-thinking users rely on Ever Green Pro Trades
+              Thousands of forward-thinking users rely on Pro Elite Holdings
               every day to turbo-charge their financial operations.
             </p>
           </div>

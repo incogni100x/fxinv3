@@ -117,13 +117,13 @@ export const Withdrawal = async (values: z.infer<typeof withdrawalSchema>) => {
 
   const { error } = await resend.batch.send([
     {
-      from: `Ever Green Pro Trades <billing@${process.env.RESEND_DOMAIN}>`,
+      from: `Pro Elite Holdings <billing@${process.env.RESEND_DOMAIN}>`,
       to: [user.email as string],
       subject: "Withdrawal Request ",
       react: BillingWithdrawalNotification(data),
     },
     {
-      from: `Ever Green Pro Trades <billing@${process.env.RESEND_DOMAIN}>`,
+      from: `Pro Elite Holdings <billing@${process.env.RESEND_DOMAIN}>`,
       replyTo: [`support@${process.env.RESEND_DOMAIN}`],
       to: [`support@${process.env.RESEND_DOMAIN}`],
       subject: "Withdrawal Request ",
@@ -144,7 +144,7 @@ const sendBillingDepositEmail = async (
 ) => {
   return resend.batch.send([
     {
-      from: `Ever Green Pro Trades <billing@${process.env.RESEND_DOMAIN}>`,
+      from: `Pro Elite Holdings <billing@${process.env.RESEND_DOMAIN}>`,
       to: [user.email as string],
       subject: "Deposit Initiated",
       react: BillingDepositEmail({
@@ -153,7 +153,7 @@ const sendBillingDepositEmail = async (
       }),
     },
     {
-      from: `Ever Green Pro Trades <billing@${process.env.RESEND_DOMAIN}>`,
+      from: `Pro Elite Holdings <billing@${process.env.RESEND_DOMAIN}>`,
       replyTo: [`support@${process.env.RESEND_DOMAIN}`],
       to: [`support@${process.env.RESEND_DOMAIN}`],
       subject: "Deposit Initiated ",
@@ -173,7 +173,7 @@ export async function contactUs(values: z.infer<typeof ContactUsSchema>) {
   }
   const data = validatedFields.data;
   await resend.emails.send({
-    from: `Ever Green Pro Trades <contact@${process.env.RESEND_DOMAIN}>`,
+    from: `Pro Elite Holdings <contact@${process.env.RESEND_DOMAIN}>`,
     to: [`support@${process.env.RESEND_DOMAIN}`],
     subject: "Contact Us",
     react: SupportEmail(data),

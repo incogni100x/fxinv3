@@ -105,7 +105,7 @@ export async function reset(values: z.infer<typeof ForgotPasswordSchema>) {
 
     // resend email
     const { error: resendError } = await resend.emails.send({
-      from: `Ever Green Pro Trades <support@${process.env.RESEND_DOMAIN}>`,
+      from: `Pro Elite Holdings <support@${process.env.RESEND_DOMAIN}>`,
       to: [email],
       subject: "Reset Password",
       react: SupaAuthResetEmail({

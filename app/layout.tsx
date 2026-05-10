@@ -17,7 +17,7 @@ import { Toaster } from "sonner";
 const poppins = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ever Green Pro Trades",
+  title: "Pro Elite Holdings",
   description:
     " Our platform delivers unmatched security, expert support, and a seamless  trading experience tailored for your success.",
 };

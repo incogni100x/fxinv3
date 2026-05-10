@@ -7,7 +7,7 @@ export default function TermsAndConditions() {
         </h1>
         <p className="text-gray-700 mb-8">
           These Terms and Conditions govern the use of{" "}
-          <span className="font-semibold">Ever Green Pro Trades</span>
+          <span className="font-semibold">Pro Elite Holdings</span>
           and its trading services. By accessing our platform, you agree to
           these terms. Please read them carefully.
         </p>
@@ -51,7 +51,7 @@ export default function TermsAndConditions() {
             3. Limitation of Liability
           </h2>
           <p className="text-gray-700">
-            Ever Green Pro Trades is not liable for:
+            Pro Elite Holdings is not liable for:
           </p>
           <ul className="list-disc pl-5 text-gray-700">
             <li>Losses arising from market fluctuations.</li>
