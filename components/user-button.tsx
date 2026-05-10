@@ -23,27 +23,32 @@ interface Props {
 export const UserButton = ({ user }: Props) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-4 w-full p-4 text-white bg-gray-800 rounded-md">
-        <Avatar>
+      <DropdownMenuTrigger className="flex w-full min-w-0 items-center gap-3 rounded-md bg-gray-800 p-3 text-left text-white">
+        <Avatar className="h-10 w-10 shrink-0">
           <AvatarFallback className="bg-primary p-2">
             <UserIcon className="h-6 w-6 text-white" />
           </AvatarFallback>
         </Avatar>
-        <div className="text-sm text-start">
-          <div className="font-semibold">
+        <div className="min-w-0 flex-1 text-sm">
+          <div className="truncate font-semibold">
             {user?.user_metadata.first_name} {user?.user_metadata.last_name}
           </div>
-          <div className="text-gray-500 dark:text-gray-400">{user?.email}</div>
+          <div className="truncate text-xs text-gray-400">{user?.email}</div>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64 lg:w-72" align="end">
-        <DropdownMenuLabel className="flex items-center gap-2">
-          <div className="bg-primary rounded-full p-1.5">
+        <DropdownMenuLabel className="flex min-w-0 items-center gap-2">
+          <div className="shrink-0 rounded-full bg-primary p-1.5">
             <UserIcon className="text-white h-5 w-5" />
           </div>
-          <div className="text-sm">
-            <div className="font-semibold">{user?.user_metadata.name}</div>
-            <div className="text-gray-500 dark:text-gray-400">
+          <div className="min-w-0 text-sm">
+            <div className="truncate font-semibold">
+              {user?.user_metadata.name ||
+                `${user?.user_metadata.first_name ?? ""} ${
+                  user?.user_metadata.last_name ?? ""
+                }`}
+            </div>
+            <div className="truncate text-xs text-gray-500 dark:text-gray-400">
               {user?.email}
             </div>
           </div>
