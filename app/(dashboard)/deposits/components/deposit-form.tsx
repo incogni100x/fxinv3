@@ -51,16 +51,16 @@ export const DepositSchema = z.object({
 
 const wallets = [
   {
-    name: "BITCOIN",
-    address: "bc1qhzvfkacadyeur77wes5v3hutrn54vfrhx6hgy0",
+    name: "BTC",
+    address: "bc1qdtq5yrljqcwsuzcc7xxwzr7un7vzr6e3vz4g95",
   },
   {
     name: "Ethereum",
-    address: "0xB74e482695963Eb7cAf01d76cEf9A3dd1A2ED92f",
+    address: "0xc1B36eaB1Bf1dae82ae60DC08D1c84aef0f147Ec",
   },
   {
     name: "USDT",
-    address: "TEkWPH5Ah7ULnoeGSN2rnwMDu5YMYqCEbT",
+    address: "THrQ8kEQTzeqjEnKFXHaY1oE339RriicBf",
   },
 ];
 
@@ -245,7 +245,9 @@ export default function DepositForm() {
             <div className="text-center space-y-4">
               <DialogHeader>
                 <DialogTitle className="text-xl font-medium">
-                  Wallet Address for {selectedCrypto.name}
+                  {selectedCrypto.name === "USDT"
+                    ? "Wallet Address for USDT TRC20"
+                    : `Wallet Address for ${selectedCrypto.name}`}
                 </DialogTitle>
               </DialogHeader>
               <div
@@ -261,7 +263,7 @@ export default function DepositForm() {
               <div className="flex items-center justify-center">
                 <QRCodeSVG
                   value={
-                    selectedCrypto.name === "Bitcoin"
+                    selectedCrypto.name === "BTC"
                       ? `bitcoin:${selectedCrypto.address}`
                       : selectedCrypto.name === "Ethereum"
                       ? `ethereum:${selectedCrypto.address}`
