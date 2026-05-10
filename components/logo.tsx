@@ -6,8 +6,8 @@ export default function Logo() {
     <Image
       src="/images/logo.svg"
       alt="Pro Elite Holdings"
-      width={60}
-      height={60}
+      width={44}
+      height={44}
       priority
     />
   );
