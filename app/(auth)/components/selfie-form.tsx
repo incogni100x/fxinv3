@@ -165,14 +165,16 @@ export default function UserIdentityVerification() {
                         />
                         <div className="flex items-center">
                           <hr className="flex-grow border-t" />
-                          <span className="px-3 text-sm text-gray-500">or</span>
+                          <span className="px-3 text-sm text-blue-900/60">
+                            or
+                          </span>
                           <hr className="flex-grow border-t" />
                         </div>
                         <Button
                           type="button"
                           onClick={() => fileInputRef.current?.click()}
                           variant="outline"
-                          className="w-full text-black"
+                          className="w-full border-blue-200 bg-blue-50 text-blue-950 hover:bg-blue-100"
                         >
                           <Upload className="mr-2 h-4 w-4" />
                           Upload Image

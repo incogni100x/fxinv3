@@ -73,7 +73,7 @@ export function CameraDialog({
         </Button>
       </DialogTrigger>
       <DialogContent
-        className="sm:max-w-md"
+        className="border-blue-200 bg-blue-100 text-blue-950 sm:max-w-md"
         onInteractOutside={(e) => e.preventDefault()}
       >
         <DialogHeader>
@@ -89,7 +89,7 @@ export function CameraDialog({
         <DialogFooter className="sm:justify-between">
           <Button onClick={captureImage}>Capture</Button>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button type="button" variant="secondary" className="text-blue-950">
               Close
             </Button>
           </DialogClose>

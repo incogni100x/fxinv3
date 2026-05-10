@@ -139,7 +139,7 @@ export function IdentificationForm() {
                   disabled={loading}
                 >
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="border-blue-200 bg-blue-50 text-blue-950 focus:ring-blue-500">
                       <SelectValue placeholder="Select Document Type" />
                     </SelectTrigger>
                   </FormControl>
@@ -170,7 +170,7 @@ export function IdentificationForm() {
                   <FormControl>
                     <FileUploader
                       value={field.value}
-                      className="bg-muted"
+                      className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
                       onValueChange={field.onChange}
                       maxFileCount={4}
                       maxSize={4 * 1024 * 1024}

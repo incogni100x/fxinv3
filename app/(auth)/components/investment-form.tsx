@@ -91,7 +91,7 @@ export default function InvestmentPlansForm({
                         className={`relative flex flex-col items-start justify-between border rounded-md p-6 cursor-pointer transition-colors ${
                           field.value === plan.id
                             ? `${plan.color} border-2`
-                            : "border-gray-300"
+                            : "border-blue-200 bg-blue-50/70"
                         }`}
                       >
                         {field.value === plan.id && (
@@ -106,13 +106,13 @@ export default function InvestmentPlansForm({
                             {plan.name}
                           </FormLabel>
 
-                          <p className="text-sm font-medium text-gray-800">
+                          <p className="text-sm font-medium text-blue-900">
                             Price: ${plan.price.toLocaleString()}
                           </p>
-                          <p className="text-sm font-medium text-gray-800">
+                          <p className="text-sm font-medium text-blue-900">
                             Weekly Earnings: {plan.weeklyEarnings}
                           </p>
-                          <p className="text-sm font-medium text-gray-800">
+                          <p className="text-sm font-medium text-blue-900">
                             ROI: ${plan.roi.toLocaleString()}
                           </p>
                         </div>

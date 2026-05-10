@@ -26,17 +26,22 @@ export const FormWrapper = ({
   className,
 }: CardWrapperProps) => {
   return (
-    <Card className={cn("w-full  rounded-lg py-10", className)}>
-      <CardHeader className=" flex items-center justify-center text-center space-y-4">
+    <Card
+      className={cn(
+        "w-full rounded-lg border-blue-200 bg-blue-100/80 py-10 shadow-lg shadow-blue-200/60 [&_label]:text-blue-950",
+        className
+      )}
+    >
+      <CardHeader className="flex items-center justify-center space-y-4 text-center">
         {currentStep && lastStep && (
-          <h3 className="text-sm text-primary">
+          <h3 className="text-sm font-medium text-blue-700">
             Step {currentStep}/{lastStep}
           </h3>
         )}
-        <CardTitle className=" text-neutral-950 text-2xl lg:text-4xl tracking-tighter">
+        <CardTitle className="text-2xl tracking-tighter text-blue-950 lg:text-4xl">
           {Label}
         </CardTitle>
-        <CardDescription className="max-w-md text-base lg:text-lg text-neutral-600 tracking-tight">
+        <CardDescription className="max-w-md text-base tracking-tight text-blue-900/70 lg:text-lg">
           {description}
         </CardDescription>
       </CardHeader>

@@ -80,7 +80,7 @@ export default function ForgotPasswordForm() {
               <FormItem>
                 <FormControl>
                   <Input
-                    className="bg-muted"
+                    className="border-blue-200 bg-blue-50 text-blue-950 placeholder:text-blue-700/45 focus-visible:ring-blue-500"
                     {...field}
                     disabled={isPending}
                     placeholder="Enter your email address"
@@ -100,7 +100,7 @@ export default function ForgotPasswordForm() {
             />
 
             <Button
-              className="text-black"
+              className="text-blue-950 hover:bg-blue-100"
               size={"lg"}
               asChild
               variant={"ghost"}
@@ -112,7 +112,7 @@ export default function ForgotPasswordForm() {
       </Form>
       <Dialog open={isOtpDialogOpen} onOpenChange={setOtpDialogOpen}>
         <DialogContent
-          className="sm:max-w-[425px]"
+          className="border-blue-200 bg-blue-100 text-blue-950 sm:max-w-[425px]"
           onInteractOutside={(e) => e.preventDefault()}
         >
           <DialogHeader>
