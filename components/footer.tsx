@@ -15,7 +15,7 @@ export default function Footer() {
             <ul role="list" className="mt-6 space-y-4">
               <li>
                 <a
-                  href="/about"
+                  href="/about-us"
                   className="text-md leading-6 text-gray-300 hover:text-white"
                 >
                   About us
